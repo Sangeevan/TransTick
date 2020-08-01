@@ -1,0 +1,7 @@
+{
+  "name": "TransTick",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
