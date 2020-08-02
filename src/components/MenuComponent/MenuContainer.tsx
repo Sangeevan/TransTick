@@ -13,16 +13,20 @@ export const MenuContainer: React.FC = () => {
             <IonContent>
                 <IonList>
                     <IonItem>Profile</IonItem>
-                    <IonItem>My Tickets</IonItem>
-                    <IonItem>Add Ticket</IonItem>
-                    <IonItem>Home</IonItem>
+                    <IonItem routerLink="/mytickets">My Tickets</IonItem>
+                    <IonItem routerLink="/addticket">Add Ticket</IonItem>
+                    <IonItem routerLink="/home">Home</IonItem>
                     <IonItem lines="none"></IonItem>
                     <IonItem lines="full"></IonItem>
-                    <IonItem lines="none">Sign Out</IonItem>
+                    <IonItem onClick={()=>logout()} lines="none">Sign Out</IonItem>
                 </IonList>
             </IonContent>
         </IonMenu>
     );
+}
+
+function logout(){
+    alert("Sign Out");
 }
 
 export default MenuContainer;
