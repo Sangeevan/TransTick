@@ -1,21 +1,21 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import LoginContainer from '../../components/LoginComponent/LoginContainer';
-import './Login.css';
+import SignupContainer from '../../components/SignupComponent/SignupContainer';
+import './Signup.css';
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>TransTick</IonTitle>
+          <IonTitle>Create Account</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <LoginContainer />
+        <SignupContainer />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Login;
+export default Signup;

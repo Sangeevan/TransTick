@@ -1,22 +1,22 @@
 import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import HomeContainer from '../../components/HomeComponent/HomeContainer';
-import './Home.css';
+import AddTicketContainer from '../../components/AllTicketsComponent/AllTicketsContainer';
+import './AddTicket.css';
 
-const Home: React.FC = () => {
+const AddTicket: React.FC = () => {
   return (
     <IonPage id="menu">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>Add Ticket</IonTitle>
           <IonMenuButton slot="start"></IonMenuButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <HomeContainer />
+        <AddTicketContainer />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default AddTicket;
