@@ -15,7 +15,7 @@ export const MenuContainer: React.FC = () => {
                     <IonItem>Profile</IonItem>
                     <IonItem routerLink="/mytickets">My Tickets</IonItem>
                     <IonItem routerLink="/addticket">Add Ticket</IonItem>
-                    <IonItem routerLink="/home">Home</IonItem>
+                    <IonItem routerLink="/home" lines="none">Home</IonItem>
                     <IonItem lines="none"></IonItem>
                     <IonItem lines="full"></IonItem>
                     <IonItem onClick={()=>logout()} lines="none">Sign Out</IonItem>
@@ -26,7 +26,7 @@ export const MenuContainer: React.FC = () => {
 }
 
 function logout(){
-    alert("Sign Out");
+    window.location.href = "/";
 }
 
 export default MenuContainer;

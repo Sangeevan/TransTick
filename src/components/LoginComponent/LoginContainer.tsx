@@ -1,21 +1,19 @@
 import { IonButton} from '@ionic/react';
-import { History } from 'history';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
 import './LoginContainer.css';
 
-interface ContainerProps extends RouteComponentProps { }
+interface ContainerProps { }
 
-const LoginContainer: React.FC<ContainerProps> = ({history}) => {
+const LoginContainer: React.FC<ContainerProps> = () => {
   return (
     <div className="container">
-      <IonButton className="login-button" expand="block" onClick={()=>login(history)} >Block Button</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login()} >Sign in</IonButton>
     </div>
   );
 };
 
-function login(history: History<History.UnknownFacade>){
-  alert("Wel Come");
+function login(){
+    window.location.href = "/home";
 }
 
 export default LoginContainer;
