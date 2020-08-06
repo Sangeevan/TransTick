@@ -33,21 +33,21 @@ import './theme/variables.css';
 
 const App: React.FC = () => (
   <BrowserRouter>
-  <IonApp>
-    <Menu/>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/" render={() => <Redirect to="/login" />} />
-        <Route path="/login" component={Login} exact={true} />
-        <Route path="/signup" component={Signup} exact={true} />
-        <Route path="/home" component={Home} exact={true} />
-        <Route path="/alltickets" component={AllTickets} exact={true} />
-        <Route path="/addticket" component={AddTicket} exact={true} />
-        <Route path="/mytickets" component={MyTickets} exact={true} />
-        <Route path="/ticketdetails" component={TicketDetails} exact={true} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
+    <IonApp>
+      <Menu/>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/" render={() => <Redirect to="/login" />} />
+          <Route path="/login" component={Login} exact={true} />
+          <Route path="/signup" component={Signup} exact={true} />
+          <Route path="/home" component={Home} exact={true} />
+          <Route path="/alltickets" component={AllTickets} exact={true} />
+          <Route path="/addticket" component={AddTicket} exact={true} />
+          <Route path="/mytickets" component={MyTickets} exact={true} />
+          <Route path="/ticketdetails" component={TicketDetails} exact={true} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
   </BrowserRouter>
 );
 

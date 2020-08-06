@@ -5,14 +5,14 @@ import './Login.css';
 
 const Login: React.FC = () => {
   return (
-    <IonPage>
+    <IonPage id="menu">
       <IonHeader>
         <IonToolbar>
           <IonTitle>TransTick</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <LoginContainer />
+        <LoginContainer/> 
       </IonContent>
     </IonPage>
   );
