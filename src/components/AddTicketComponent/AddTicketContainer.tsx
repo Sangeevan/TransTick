@@ -11,6 +11,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
   const [eventData, setEventData] = useState<string>();
   const [eventTime, setEventTime] = useState<string>();
   const [eventVenue, setEventVenue] = useState<string>();
+  const [eventType, setEventType] = useState<string>();
   const [eventDistrict, setEventDistrict] = useState<string>();
   const [eventPrice, setEventPrice] = useState<string>();
   const [eventPersonName, setEventPersonName] = useState<string>();
@@ -35,6 +36,21 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           <IonItem>
             <IonLabel position="floating">Event venue</IonLabel>
             <IonInput type="text" value={eventVenue} onIonChange={e => setEventVenue(e.detail.value!)}></IonInput>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">Event type</IonLabel>
+            <IonSelect value={eventType} onIonChange={e => setEventType(e.detail.value)}>
+              <IonSelectOption value="Cinema">Cinema</IonSelectOption>
+              <IonSelectOption value="Music">Music</IonSelectOption>
+              <IonSelectOption value="Dance">Dance</IonSelectOption>
+              <IonSelectOption value="Sports">Sports</IonSelectOption>
+              <IonSelectOption value="Festivals">Festivals</IonSelectOption>
+              <IonSelectOption value="Shows">Shows</IonSelectOption>
+              <IonSelectOption value="Party">Party</IonSelectOption>
+              <IonSelectOption value="Exhibition">Exhibition</IonSelectOption>
+              <IonSelectOption value="Seminar">Seminar</IonSelectOption>
+              <IonSelectOption value="Other">Other</IonSelectOption>
+            </IonSelect>
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Venue district</IonLabel>
@@ -84,19 +100,19 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>addTicket(eventName, eventData, eventTime, eventVenue, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Create account</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>addTicket(eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Create account</IonButton>
       
     </div>
   );
 };
 
-function addTicket(eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventExtraNotes: string | undefined){
+function addTicket(eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventExtraNotes: string | undefined){
   let ticket = false;
   if(true){
     ticket = true;
   }
   if(ticket){
-    alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Extra notes: "+ eventExtraNotes]);
+    alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Event type: "+ eventType+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Extra notes: "+ eventExtraNotes]);
     window.location.href = "/mytickets";
   }
 }

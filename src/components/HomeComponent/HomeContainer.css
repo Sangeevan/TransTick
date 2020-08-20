@@ -7,6 +7,10 @@
   transform: translateY(-50%);
 }
 
+.containerHome{
+  margin: 20px;
+}
+
 .container strong {
   font-size: 20px;
   line-height: 26px;
@@ -21,4 +25,9 @@
 
 .container a {
   text-decoration: none;
+}
+
+.homeButton{
+  height: 100px;
+  margin: 20px;
 }

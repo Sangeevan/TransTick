@@ -2,16 +2,7 @@ import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, 
 import React, { useState } from 'react';
 import './LoginContainer.css';
 
-interface ContainerProps { 
-}
-
-type Item = {
-  src: string;
-  text: string;
-};
-const items: Item[] = [{ src: 'http://placekitten.com/g/200/300', text: 'a picture of a cat' }];
-
-
+interface ContainerProps { }
 
 const LoginContainer: React.FC<ContainerProps> = () => {
 
@@ -20,8 +11,8 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   
   return (
 
-    <div className="containerLogin">   
-      <IonImg  className="img" src= "https://drive.google.com/u/0/uc?id=1l29nn-9GWjv8OYL09yZwQ5t3PBrpVerx&export=download"/>
+    <div className="containerLogin">
+      <IonImg  className="img" src="/assets/images/transtick.png" />
       <IonList> 
           <IonItemDivider><a>Sign in to TransTick</a></IonItemDivider>
           <IonItem>
