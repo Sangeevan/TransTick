@@ -1,4 +1,4 @@
-import { IonButton, IonInput, IonItem, IonItemDivider, IonList } from '@ionic/react';
+import { IonButton, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 import React, { useState } from 'react';
 import './SignupContainer.css';
 
@@ -10,37 +10,78 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   const [password, setPassword] = useState<string>();
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<string>();
+  const [DOB, setDOB] = useState<string>();
+  const [gender, setGender] = useState<string>();
   const [address, setAddress] = useState<string>();
   const [district, setDistrict] = useState<string>();
-  const [DOB, setDOB] = useState<string>();
 
   return (
     <div className="containerSignup">
       <IonList>
           <IonItem>
-            <IonInput type="email" value={userName} placeholder="Email" onIonChange={e => setUserName(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Email</IonLabel>
+            <IonInput type="email" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="password" value={password} placeholder="Password" onIonChange={e => setPassword(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Password</IonLabel>
+            <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="password" value={confirmPassword} placeholder="Confirm Password" onIonChange={e => setConfirmPassword(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Confirm password</IonLabel>
+            <IonInput type="password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="number" value={phoneNumber} placeholder="Phone number" onIonChange={e => setPhoneNumber(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Phone number</IonLabel>
+            <IonInput type="number" value={phoneNumber} onIonChange={e => setPhoneNumber(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="text" value={address} placeholder="Address" onIonChange={e => setAddress(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Date of birth</IonLabel>
+            <IonInput className="topMargin" type="date" value={DOB} onIonChange={e => setDOB(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="text" value={district} placeholder="District" onIonChange={e => setDistrict(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Gender</IonLabel>
+            <IonSelect value={gender} onIonChange={e => setGender(e.detail.value)}>
+              <IonSelectOption value="Female">Female</IonSelectOption>
+              <IonSelectOption value="Male">Male</IonSelectOption>
+            </IonSelect>
           </IonItem>
           <IonItem>
-            <IonInput type="text" value={DOB} placeholder="Date of birth" onIonChange={e => setDOB(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Address</IonLabel>
+            <IonTextarea value={address} onIonChange={e => setAddress(e.detail.value!)}></IonTextarea>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">District</IonLabel>
+            <IonSelect value={district} onIonChange={e => setDistrict(e.detail.value)}>
+              <IonSelectOption value="Ampara">Ampara</IonSelectOption>
+              <IonSelectOption value="Anuradhapura">Anuradhapura</IonSelectOption>
+              <IonSelectOption value="Badulla">Badulla</IonSelectOption>
+              <IonSelectOption value="Batticaloa">Batticaloa</IonSelectOption>
+              <IonSelectOption value="Colombo">Colombo</IonSelectOption>
+              <IonSelectOption value="Galle">Galle</IonSelectOption>
+              <IonSelectOption value="Gampaha">Gampaha</IonSelectOption>
+              <IonSelectOption value="Hambantota">Hambantota</IonSelectOption>
+              <IonSelectOption value="Jaffna">Jaffna</IonSelectOption>
+              <IonSelectOption value="Kalutara">Kalutara</IonSelectOption>
+              <IonSelectOption value="Kandy">Kandy</IonSelectOption>
+              <IonSelectOption value="Kegalle">Kegalle</IonSelectOption>
+              <IonSelectOption value="Kilinochchi">Kilinochchi</IonSelectOption>
+              <IonSelectOption value="Kurunegala">Kurunegala</IonSelectOption>
+              <IonSelectOption value="Mannar">Mannar</IonSelectOption>
+              <IonSelectOption value="Matale">Matale</IonSelectOption>
+              <IonSelectOption value="Matara">Matara</IonSelectOption>
+              <IonSelectOption value="Moneragala">Moneragala</IonSelectOption>
+              <IonSelectOption value="Mullaitivu">Mullaitivu</IonSelectOption>
+              <IonSelectOption value="Nuwara Eliya">Nuwara Eliya</IonSelectOption>
+              <IonSelectOption value="Polonnaruwa">Polonnaruwa</IonSelectOption>
+              <IonSelectOption value="Puttalam">Puttalam</IonSelectOption>
+              <IonSelectOption value="Ratnapura">Ratnapura</IonSelectOption>
+              <IonSelectOption value="Trincomalee">Trincomalee</IonSelectOption>
+              <IonSelectOption value="Vavuniya">Vavuniya</IonSelectOption>
+            </IonSelect>
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>signup(userName, password, confirmPassword)} >Create account</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>signup(userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
       <br/>
       <div className="center">
       <p>Already have an account?</p> 
@@ -50,12 +91,13 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-function signup( userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined){
+function signup( userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined,  phoneNumber:string | undefined,  DOB:string | undefined,  gender:string | undefined,  address:string | undefined,  district:string | undefined){
   let signupUser = false;
   if(password==confirmPassword){
     signupUser = true;
   }
   if(signupUser){
+    alert(["Email: "+ userName+ "\n"+ "Password: "+ password+ "\n"+ "Confirm password: "+ confirmPassword+ "\n"+ "Phone number: "+ phoneNumber+ "\n"+ "Date of birth: "+ DOB+ "\n"+ "Gender: "+ gender+ "\n"+ "Address: "+ address+ "\n"+ "District: "+ district]);
     window.location.href = "/login";
   }
 }

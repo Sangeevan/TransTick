@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, IonList, IonRow, IonThumbnail} from '@ionic/react';
+import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonRow, IonThumbnail} from '@ionic/react';
 import React, { useState } from 'react';
 import './LoginContainer.css';
 
@@ -21,15 +21,16 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   return (
 
     <div className="containerLogin">   
-      <IonImg  className="img" src= ""/>
-         <br/>
+      <IonImg  className="img" src= "https://drive.google.com/u/0/uc?id=1l29nn-9GWjv8OYL09yZwQ5t3PBrpVerx&export=download"/>
       <IonList> 
-          <IonItemDivider>Sign in to TransTick</IonItemDivider>
+          <IonItemDivider><a>Sign in to TransTick</a></IonItemDivider>
           <IonItem>
-            <IonInput type="email" value={userName} placeholder="Email" onIonChange={e => setUserName(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Email</IonLabel>
+            <IonInput type="email" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
-            <IonInput type="password" value={password} placeholder="Password" onIonChange={e => setPassword(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Password</IonLabel>
+            <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
           </IonItem>
       </IonList>
       <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(userName, password)} >Sign in</IonButton>
@@ -48,6 +49,7 @@ function login( userName: string | undefined, password:string | undefined){
     loginUser = true;
   }
   if(loginUser){
+    alert(["Email: "+ userName+ "\n"+ "Password: "+ password]);
     window.location.href = "/home";
   }
 }

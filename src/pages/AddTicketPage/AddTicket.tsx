@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import AddTicketContainer from '../../components/AllTicketsComponent/AllTicketsContainer';
+import AddTicketContainer from '../../components/AddTicketComponent/AddTicketContainer';
 import './AddTicket.css';
 
 const AddTicket: React.FC = () => {
