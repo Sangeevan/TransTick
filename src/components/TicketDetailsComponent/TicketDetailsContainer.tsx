@@ -13,7 +13,6 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
       <IonItem>
         <IonLabel>{ticket.name}</IonLabel>
         <IonLabel>{ticket.price}</IonLabel>
-        <IonButton>Buy</IonButton>
       </IonItem>
     </div>
   );
