@@ -7,18 +7,22 @@
   transform: translateY(-50%);
 }
 
-.container strong {
+.containerMyTickets{
+  margin: 20px;
+}
+
+.containerMyTickets strong {
   font-size: 20px;
   line-height: 26px;
 }
 
-.container p {
+.containerMyTickets p {
   font-size: 16px;
   line-height: 22px;
   color: #8c8c8c;
   margin: 0;
 }
 
-.container a {
+.containerMyTickets a {
   text-decoration: none;
 }
