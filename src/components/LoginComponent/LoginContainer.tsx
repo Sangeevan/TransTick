@@ -1,13 +1,23 @@
-import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonRow, IonThumbnail} from '@ionic/react';
+import { IonButton, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList} from '@ionic/react';
+import { home } from 'ionicons/icons';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, Route } from 'react-router-dom';
+import { setUserState } from '../../redux/action';
 import './LoginContainer.css';
+import { useHistory } from 'react-router-dom';
 
 interface ContainerProps { }
 
 const LoginContainer: React.FC<ContainerProps> = () => {
 
+  const history = useHistory();
+
   const [userName, setUserName] = useState<string>();
   const [password, setPassword] = useState<string>();
+
+  const dispatch = useDispatch();
+  dispatch(setUserState("Welcome to TransTick"));
   
   return (
 
@@ -24,24 +34,24 @@ const LoginContainer: React.FC<ContainerProps> = () => {
             <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
           </IonItem>
       </IonList>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(userName, password)} >Sign in</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(history,userName,password)}  >Sign in</IonButton>
       <br/>
       <div className="center">
       <p>Don't have an account?</p> 
-      <strong><a href="/signup">Sign up</a></strong>
+      <strong><Link to="/signup">Sign up</Link></strong>
       </div>
     </div>
   );
 };
 
-function login( userName: string | undefined, password:string | undefined){
+function login( history: any, userName: string | undefined, password:string | undefined){
   let loginUser = false;
   if(userName=="sangeevan" && password=="1995"){
     loginUser = true;
   }
   if(loginUser){
     alert(["Email: "+ userName+ "\n"+ "Password: "+ password]);
-    window.location.href = "/home";
+    history.push('/home');
   }
 }
 

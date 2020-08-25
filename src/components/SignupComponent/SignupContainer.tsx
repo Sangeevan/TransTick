@@ -1,6 +1,8 @@
-import { IonButton, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
+import { IonButton, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SignupContainer.css';
+import { useHistory } from 'react-router-dom';
 
 interface ContainerProps { }
 
@@ -14,6 +16,8 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   const [gender, setGender] = useState<string>();
   const [address, setAddress] = useState<string>();
   const [district, setDistrict] = useState<string>();
+
+  const history = useHistory();
 
   return (
     <div className="containerSignup">
@@ -81,24 +85,24 @@ const SignupContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>signup(userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
       <br/>
       <div className="center">
       <p>Already have an account?</p> 
-      <strong><a href="/login">Log in</a></strong>
+      <strong><Link to="/login">Log in</Link></strong>
       </div>    
     </div>
   );
 };
 
-function signup( userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined,  phoneNumber:string | undefined,  DOB:string | undefined,  gender:string | undefined,  address:string | undefined,  district:string | undefined){
+function signup( history:any, userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined,  phoneNumber:string | undefined,  DOB:string | undefined,  gender:string | undefined,  address:string | undefined,  district:string | undefined){
   let signupUser = false;
   if(password==confirmPassword){
     signupUser = true;
   }
   if(signupUser){
     alert(["Email: "+ userName+ "\n"+ "Password: "+ password+ "\n"+ "Confirm password: "+ confirmPassword+ "\n"+ "Phone number: "+ phoneNumber+ "\n"+ "Date of birth: "+ DOB+ "\n"+ "Gender: "+ gender+ "\n"+ "Address: "+ address+ "\n"+ "District: "+ district]);
-    window.location.href = "/login";
+    history.push('/login');
   }
 }
 

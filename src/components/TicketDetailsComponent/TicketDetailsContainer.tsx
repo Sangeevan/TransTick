@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonRow, IonThumbnail} from '@ionic/react';
+import {  IonItem, IonLabel } from '@ionic/react';
 import React from 'react';
 import './TicketDetailsContainer.css';
 

@@ -1,7 +1,7 @@
 import { IonButton, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 import React, { useState } from 'react';
-import { isNull } from 'util';
 import './AddTicketContainer.css';
+import { useHistory } from 'react-router-dom';
 
 interface ContainerProps { }
 
@@ -17,6 +17,8 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
   const [eventPersonName, setEventPersonName] = useState<string>();
   const [eventPersonNumber, setEventPersonNumber] = useState<string>();
   const [eventExtraNotes, setEventExtraNotes] = useState<string>();
+
+  const history = useHistory();
 
   return (
     <div className="containerAddTicket">
@@ -100,20 +102,20 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>addTicket(eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Create account</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Add Ticket</IonButton>
       
     </div>
   );
 };
 
-function addTicket(eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventExtraNotes: string | undefined){
+function addTicket(history: any, eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventExtraNotes: string | undefined){
   let ticket = false;
   if(true){
     ticket = true;
   }
   if(ticket){
     alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Event type: "+ eventType+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Extra notes: "+ eventExtraNotes]);
-    window.location.href = "/mytickets";
+    history.push('/mytickets');
   }
 }
 

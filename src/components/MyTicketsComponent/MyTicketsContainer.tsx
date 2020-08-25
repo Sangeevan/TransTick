@@ -1,6 +1,7 @@
-import { IonButton, IonCol, IonGrid, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonRow, IonThumbnail} from '@ionic/react';
+import { IonButton, IonItem, IonLabel, IonList } from '@ionic/react';
 import React from 'react';
 import './MyTicketsContainer.css';
+import { useHistory } from 'react-router-dom';
 
 interface ContainerProps { }
 
@@ -11,6 +12,8 @@ const MyTicketsContainer: React.FC<ContainerProps> = () => {
                 {"id":"3","name":"Dance","price":"500"},
                 {"id":"4","name":"Sports","price":"1000"}];
 
+  const history = useHistory();
+
   return (
     <div className="containerMyTickets">
       <IonList>
@@ -18,7 +21,7 @@ const MyTicketsContainer: React.FC<ContainerProps> = () => {
           <IonItem>
               <IonLabel>{ticket.name}</IonLabel>
               <IonLabel>{ticket.price}</IonLabel>
-              <IonButton onClick={()=>deleteTicket(ticket.id)}>Delete</IonButton>
+              <IonButton onClick={()=>deleteTicket(history, ticket.id)}>Delete</IonButton>
           </IonItem>
         ))}
       </IonList>
@@ -26,9 +29,9 @@ const MyTicketsContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-function deleteTicket(selectedTicket:string){
+function deleteTicket(history:any, selectedTicket:string){
   alert(selectedTicket);
-  window.location.href = "/mytickets";
+  history.push('/mytickets');
 }
 
 export default MyTicketsContainer;
