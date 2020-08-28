@@ -85,7 +85,7 @@ const SignupContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
+      <IonButton id="signupbtn" className="signup-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
       <br/>
       <div className="center">
       <p>Already have an account?</p> 
@@ -97,7 +97,7 @@ const SignupContainer: React.FC<ContainerProps> = () => {
 
 function signup( history:any, userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined,  phoneNumber:string | undefined,  DOB:string | undefined,  gender:string | undefined,  address:string | undefined,  district:string | undefined){
   let signupUser = false;
-  if(password==confirmPassword){
+  if(password===confirmPassword){
     signupUser = true;
   }
   if(signupUser){

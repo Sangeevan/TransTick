@@ -28,6 +28,13 @@
   margin: 0;
 }
 
+.heading {
+  font-size: 15px;
+  line-height: 20px;
+  color: blue;
+  margin: 0;
+}
+
 .containerLogin a {
   text-decoration: none;
 }

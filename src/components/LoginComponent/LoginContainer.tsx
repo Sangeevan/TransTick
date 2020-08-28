@@ -1,8 +1,7 @@
 import { IonButton, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList} from '@ionic/react';
-import { home } from 'ionicons/icons';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { setUserState } from '../../redux/action';
 import './LoginContainer.css';
 import { useHistory } from 'react-router-dom';
@@ -17,14 +16,14 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   const [password, setPassword] = useState<string>();
 
   const dispatch = useDispatch();
-  dispatch(setUserState("Welcome to TransTick"));
+  dispatch(setUserState(userName));
   
   return (
 
     <div className="containerLogin">
       <IonImg  className="img" src="/assets/images/transtick.png" />
       <IonList> 
-          <IonItemDivider><a>Sign in to TransTick</a></IonItemDivider>
+          <IonItemDivider className="heading">Sign in to TransTick</IonItemDivider>
           <IonItem>
             <IonLabel position="floating">Email</IonLabel>
             <IonInput type="email" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
@@ -46,11 +45,11 @@ const LoginContainer: React.FC<ContainerProps> = () => {
 
 function login( history: any, userName: string | undefined, password:string | undefined){
   let loginUser = false;
-  if(userName=="sangeevan" && password=="1995"){
+  if(true){
     loginUser = true;
   }
   if(loginUser){
-    alert(["Email: "+ userName+ "\n"+ "Password: "+ password]);
+    alert(["Email: ", userName+ "\n", "Password: ", password]);
     history.push('/home');
   }
 }

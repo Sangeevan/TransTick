@@ -102,7 +102,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Add Ticket</IonButton>
+      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Add Ticket</IonButton>
       
     </div>
   );

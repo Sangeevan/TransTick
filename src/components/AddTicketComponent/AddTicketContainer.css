@@ -30,3 +30,8 @@
 .topMargin{
   margin-top: 5px;
 }
+
+.addticket-button{
+  padding-left: 20px;
+  padding-right: 20px;
+}

@@ -35,3 +35,8 @@
 .topMargin{
   margin-top: 5px;
 }
+
+.signup-button{
+  padding-left: 20px;
+  padding-right: 20px;
+}

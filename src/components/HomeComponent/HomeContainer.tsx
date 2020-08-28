@@ -1,7 +1,6 @@
-import { IonButton, IonContent, IonFab, IonFabButton, IonIcon, IonImg, IonLabel } from '@ionic/react';
+import { IonButton, IonContent, IonFab, IonFabButton, IonIcon, IonImg } from '@ionic/react';
 import { addSharp } from 'ionicons/icons';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import './HomeContainer.css';
 import { useHistory } from 'react-router-dom';
 
@@ -9,13 +8,10 @@ interface ContainerProps { }
 
 const HomeContainer: React.FC<ContainerProps> = () => {
 
-  const message = useSelector((state:any) => state.user.username);
-
   const history = useHistory();
 
   return (
     <IonContent fullscreen>
-      <IonLabel>Hi! {message}</IonLabel>
       <div className="containerHome">
         <IonButton id="Cinema" className="homeButton" expand="block" onClick={()=>allTickets(history, "Cinema")} >
           <IonImg alt="Cinema" src="/assets/images/cinema.png"/>
