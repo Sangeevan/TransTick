@@ -16,6 +16,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
   const [eventPrice, setEventPrice] = useState<string>();
   const [eventPersonName, setEventPersonName] = useState<string>();
   const [eventPersonNumber, setEventPersonNumber] = useState<string>();
+  const [eventPersonEmail, setEventPersonEmail] = useState<string>();
   const [eventExtraNotes, setEventExtraNotes] = useState<string>();
 
   const history = useHistory();
@@ -97,24 +98,27 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
             <IonInput type="number" value={eventPersonNumber} onIonChange={e => setEventPersonNumber(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
+            <IonLabel position="floating">Contact email</IonLabel>
+            <IonInput type="number" value={eventPersonEmail} onIonChange={e => setEventPersonEmail(e.detail.value!)}></IonInput>
+          </IonItem>
+          <IonItem>
             <IonLabel position="floating">Extra notes</IonLabel>
             <IonTextarea value={eventExtraNotes} onIonChange={e => setEventExtraNotes(e.detail.value!)}></IonTextarea>
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventExtraNotes)} >Add Ticket</IonButton>
-      
+      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes)} >Add Ticket</IonButton>
     </div>
   );
 };
 
-function addTicket(history: any, eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventExtraNotes: string | undefined){
+function addTicket(history: any, eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventPersonEmail: string | undefined, eventExtraNotes: string | undefined){
   let ticket = false;
   if(true){
     ticket = true;
   }
   if(ticket){
-    alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Event type: "+ eventType+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Extra notes: "+ eventExtraNotes]);
+    alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Event type: "+ eventType+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Contact email: "+ eventPersonEmail+ "\n"+ "Extra notes: "+ eventExtraNotes]);
     history.push('/mytickets');
   }
 }

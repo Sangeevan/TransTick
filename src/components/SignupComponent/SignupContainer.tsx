@@ -3,19 +3,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignupContainer.css';
 import { useHistory } from 'react-router-dom';
+import {signupUser} from '../../firebaseConfig';
+import { toast } from '../../toast';
 
 interface ContainerProps { }
 
 const SignupContainer: React.FC<ContainerProps> = () => {
 
-  const [userName, setUserName] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
-  const [DOB, setDOB] = useState<string>();
-  const [gender, setGender] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [district, setDistrict] = useState<string>();
+  const [userName, setUserName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [DOB, setDOB] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
 
   const history = useHistory();
 
@@ -23,8 +26,8 @@ const SignupContainer: React.FC<ContainerProps> = () => {
     <div className="containerSignup">
       <IonList>
           <IonItem>
-            <IonLabel position="floating">Email</IonLabel>
-            <IonInput type="email" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
+            <IonLabel position="floating">Username</IonLabel>
+            <IonInput type="text" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Password</IonLabel>
@@ -37,6 +40,10 @@ const SignupContainer: React.FC<ContainerProps> = () => {
           <IonItem>
             <IonLabel position="floating">Phone number</IonLabel>
             <IonInput type="number" value={phoneNumber} onIonChange={e => setPhoneNumber(e.detail.value!)}></IonInput>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">Email</IonLabel>
+            <IonInput type="email" value={email} onIonChange={e => setEmail(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Date of birth</IonLabel>
@@ -85,7 +92,7 @@ const SignupContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="signupbtn" className="signup-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, DOB, gender, address, district)} >Create account</IonButton>
+      <IonButton id="signupbtn" className="signup-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, email, DOB, gender, address, district)} >Create account</IonButton>
       <br/>
       <div className="center">
       <p>Already have an account?</p> 
@@ -95,14 +102,23 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-function signup( history:any, userName: string | undefined, password:string | undefined,  confirmPassword:string | undefined,  phoneNumber:string | undefined,  DOB:string | undefined,  gender:string | undefined,  address:string | undefined,  district:string | undefined){
-  let signupUser = false;
-  if(password===confirmPassword){
-    signupUser = true;
+async function signup( history:any, userName: string, password:string,  confirmPassword:string,  phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string){
+  let signupUserValidation = false;
+  if(userName!='' && password !=''){
+    if(password===confirmPassword){
+      signupUserValidation = true;
+    }else{
+      toast('Password and confirm password are not matched');
+    }
+  }else{
+    toast('Username and password are required');
   }
-  if(signupUser){
-    alert(["Email: "+ userName+ "\n"+ "Password: "+ password+ "\n"+ "Confirm password: "+ confirmPassword+ "\n"+ "Phone number: "+ phoneNumber+ "\n"+ "Date of birth: "+ DOB+ "\n"+ "Gender: "+ gender+ "\n"+ "Address: "+ address+ "\n"+ "District: "+ district]);
-    history.push('/login');
+  if(signupUserValidation){
+    const res = await signupUser(userName,password);
+    if(res){
+      toast('Signup success');
+      history.push('/login');
+    }
   }
 }
 

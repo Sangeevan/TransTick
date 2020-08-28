@@ -5,6 +5,8 @@ import { Link} from 'react-router-dom';
 import { setUserState } from '../../redux/action';
 import './LoginContainer.css';
 import { useHistory } from 'react-router-dom';
+import {loginUser} from '../../firebaseConfig';
+import { toast } from '../../toast';
 
 interface ContainerProps { }
 
@@ -12,8 +14,8 @@ const LoginContainer: React.FC<ContainerProps> = () => {
 
   const history = useHistory();
 
-  const [userName, setUserName] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [userName, setUserName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const dispatch = useDispatch();
   dispatch(setUserState(userName));
@@ -25,7 +27,7 @@ const LoginContainer: React.FC<ContainerProps> = () => {
       <IonList> 
           <IonItemDivider className="heading">Sign in to TransTick</IonItemDivider>
           <IonItem>
-            <IonLabel position="floating">Email</IonLabel>
+            <IonLabel position="floating">Username</IonLabel>
             <IonInput type="email" value={userName} onIonChange={e => setUserName(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
@@ -43,14 +45,19 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-function login( history: any, userName: string | undefined, password:string | undefined){
-  let loginUser = false;
-  if(true){
-    loginUser = true;
+async function login( history: any, userName: string, password:string){
+  let loginValidation = false;
+  if(userName!='' && password !=''){
+    loginValidation = true;
+  }else{
+    toast('Username and password are required');
   }
-  if(loginUser){
-    alert(["Email: ", userName+ "\n", "Password: ", password]);
-    history.push('/home');
+  if(loginValidation){
+    const res = await loginUser(userName,password);
+    if(res){
+      toast('Login success');
+      history.push('/home');
+    }
   }
 }
 
