@@ -96,29 +96,12 @@ export async function addTicket(id: number, userName: string, eventName: string,
     }
 }
 
-export async function getAllTickets(){
+export async function getAllTickets(eventType:string, eventDistrict:string){
     try{
-        // let x;
-        // // var ref = database.ref('/tickets/'+eventType+'/'+eventDistrict);eventType: string, eventDistrict:string
-        // var ref = database.ref('/tickets/Cinema/Colombo');
-        // ref.on("value", function(snapshot) {
-        //     // console.log (snapshot.val()['1598709165788']);
-        //     x = snapshot.val()['1598709165788'];
-        //     console.log(x);
-        //     // snapshot.forEach(function (childSnapshot){
-        //     //     var data:{} = childSnapshot.val();
-        //     //     tickets.push(data);
-        //     // });
-        //   });
-          
-        //   return (x);
-
-        return firebase.database().ref('/tickets/Cinema/Colombo').once('value').then(function(snapshot) {
-            var username = (snapshot.val() && snapshot.val()) || 'Anonymous';
-            // console.log(username);
-            return username;
-          });
-
+        return firebase.database().ref('/tickets/'+eventType+'/'+eventDistrict).once('value').then(function(snapshot) {
+            var tickets = (snapshot.val() && snapshot.val()) || 'Anonymous';
+            return tickets;
+        });
     }catch(error){
         toast(error.message);
         return false

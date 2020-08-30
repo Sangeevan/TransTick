@@ -3,12 +3,15 @@ import React, { useState, valueOf } from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
 import {getAllTickets} from '../../firebaseConfig';
+import { useSelector } from 'react-redux';
 
 interface ContainerProps { }
 
 const AllTicketsContainer: React.FC<ContainerProps> = () => {
 
 const history = useHistory();
+
+const selectedEventType = useSelector((state:any) => state.event.type);
 
 const [eventDistrict, setEventDistrict] = useState<string>();
 
@@ -17,7 +20,7 @@ const [eventDistrict, setEventDistrict] = useState<string>();
       <IonList>
           <IonItem lines="full">
             <IonLabel position="floating">Filter by district</IonLabel>
-            <IonSelect value={eventDistrict} onIonChange={e => {setEventDistrict(e.detail.value);filterbydistrict(history,e.detail.value)}}>
+            <IonSelect value={eventDistrict} onIonChange={e => {setEventDistrict(e.detail.value);filterbydistrict(history,selectedEventType,e.detail.value)}}>
               <IonSelectOption value="Ampara">Ampara</IonSelectOption>
               <IonSelectOption value="Anuradhapura">Anuradhapura</IonSelectOption>
               <IonSelectOption value="Badulla">Badulla</IonSelectOption>
@@ -61,12 +64,11 @@ const [eventDistrict, setEventDistrict] = useState<string>();
   );
 };
 
-async function filterbydistrict(history:any,district:string){
-//  console.log(await getAllTickets());
+async function filterbydistrict(history:any,eventType:string,district:string){
 
- var username = (await getAllTickets() && await getAllTickets()) || 'Anonymous';
+  var tickets = (await getAllTickets(eventType,district) && await getAllTickets(eventType,district)) || 'Anonymous';
 
- console.log(username['1598709165788']);
+  console.log(tickets);
 
   history.push('/alltickets');
 }

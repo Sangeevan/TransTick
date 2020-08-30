@@ -1,6 +1,6 @@
 const defaultState = {
     user:{},
-    allTickets:{}
+    event:{}
 }
 export default function reducer(state = defaultState, {type,payload} : {type:String, payload:any}) : any {
     switch(type){
@@ -11,10 +11,12 @@ export default function reducer(state = defaultState, {type,payload} : {type:Str
                     username : payload
                 }
             }
-        case 'SET_ALL_TICKETS_STATE' :
+        case 'SET_EVENT_TYPE_STATE' :
             return {
                 ...state,
-                allTickets : payload
+                event : {
+                    type : payload
+                }
             }
     }
     return state;
