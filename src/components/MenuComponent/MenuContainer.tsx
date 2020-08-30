@@ -5,10 +5,11 @@ import './MenuContainer.css';
 import { menuController } from "@ionic/core";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { toast } from '../../toast';
 
 export const MenuContainer: React.FC = () => {
     const history = useHistory();
-    const name = useSelector((state:any) => state.user.username);
+    const userName = useSelector((state:any) => state.user.username);
     return(
         <IonMenu side="start" menuId="menu" contentId="menu">
             <IonHeader>
@@ -22,7 +23,7 @@ export const MenuContainer: React.FC = () => {
                         <IonThumbnail slot="start">
                             <IonImg src= 'https://miro.medium.com/max/3150/2*hTpk9HSXPH2QabMLpkO3iA.jpeg' />
                         </IonThumbnail>
-                        <IonLabel>{name}</IonLabel>
+                        <IonLabel>{userName}</IonLabel>
                     </IonItem>
                     <IonItem onClick={async () => await menuController.toggle()} routerLink="/home">
                         <IonIcon icon={homeOutline} />
@@ -37,7 +38,7 @@ export const MenuContainer: React.FC = () => {
                         <IonLabel>Add Ticket</IonLabel>
                     </IonItem>
                     <IonItem lines="full"></IonItem>
-                    <IonItem onClick={async () => {await menuController.toggle();logout(history)}} lines="none">
+                    <IonItem onClick={async () => {await menuController.toggle();logout(history,userName)}} lines="none">
                         <IonIcon icon={logOutOutline} />
                         <IonLabel>Sign Out</IonLabel>
                     </IonItem>
@@ -47,8 +48,9 @@ export const MenuContainer: React.FC = () => {
     );
 }
 
-function logout(history:any){
+function logout(history:any,userName:string){
     history.push('/login');
+    toast('Logout success. \n'+'Goodbye '+userName+'!');
 }
 
 export default MenuContainer;

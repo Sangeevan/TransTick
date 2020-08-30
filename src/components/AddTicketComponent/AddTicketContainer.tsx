@@ -2,24 +2,28 @@ import { IonButton, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOp
 import React, { useState } from 'react';
 import './AddTicketContainer.css';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { toast } from '../../toast';
+import {addTicket} from '../../firebaseConfig';
 
 interface ContainerProps { }
 
 const AddTicketContainer: React.FC<ContainerProps> = () => {
 
-  const [eventName, setEventName] = useState<string>();
-  const [eventData, setEventData] = useState<string>();
-  const [eventTime, setEventTime] = useState<string>();
-  const [eventVenue, setEventVenue] = useState<string>();
-  const [eventType, setEventType] = useState<string>();
-  const [eventDistrict, setEventDistrict] = useState<string>();
-  const [eventPrice, setEventPrice] = useState<string>();
-  const [eventPersonName, setEventPersonName] = useState<string>();
-  const [eventPersonNumber, setEventPersonNumber] = useState<string>();
-  const [eventPersonEmail, setEventPersonEmail] = useState<string>();
-  const [eventExtraNotes, setEventExtraNotes] = useState<string>();
+  const [eventName, setEventName] = useState<string>('');
+  const [eventDate, setEventDate] = useState<string>('');
+  const [eventTime, setEventTime] = useState<string>('');
+  const [eventVenue, setEventVenue] = useState<string>('');
+  const [eventType, setEventType] = useState<string>('');
+  const [eventDistrict, setEventDistrict] = useState<string>('');
+  const [eventPrice, setEventPrice] = useState<string>('');
+  const [eventPersonName, setEventPersonName] = useState<string>('');
+  const [eventPersonNumber, setEventPersonNumber] = useState<string>('');
+  const [eventPersonEmail, setEventPersonEmail] = useState<string>('');
+  const [eventExtraNotes, setEventExtraNotes] = useState<string>('');
 
   const history = useHistory();
+  const userName = useSelector((state:any) => state.user.username);
 
   return (
     <div className="containerAddTicket">
@@ -30,7 +34,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Event date</IonLabel>
-            <IonInput className="topMargin" type="date" value={eventData} onIonChange={e => setEventData(e.detail.value!)}></IonInput>
+            <IonInput className="topMargin" type="date" value={eventDate} onIonChange={e => setEventDate(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Event time</IonLabel>
@@ -99,7 +103,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Contact email</IonLabel>
-            <IonInput type="number" value={eventPersonEmail} onIonChange={e => setEventPersonEmail(e.detail.value!)}></IonInput>
+            <IonInput type="email" value={eventPersonEmail} onIonChange={e => setEventPersonEmail(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Extra notes</IonLabel>
@@ -107,19 +111,25 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>addTicket(history, eventName, eventData, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes)} >Add Ticket</IonButton>
+      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>ticket(history, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes)} >Add Ticket</IonButton>
     </div>
   );
 };
 
-function addTicket(history: any, eventName: string | undefined, eventData: string | undefined, eventTime: string | undefined, eventVenue: string | undefined, eventType: string | undefined, eventDistrict: string | undefined, eventPrice: string | undefined, eventPersonName: string | undefined, eventPersonNumber: string | undefined, eventPersonEmail: string | undefined, eventExtraNotes: string | undefined){
-  let ticket = false;
-  if(true){
-    ticket = true;
+async function ticket(history: any, userName:string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string){
+  let addTicketValidation = false;
+  if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes){
+    addTicketValidation = true;
+  }else{
+    toast('Please fill all fields');
   }
-  if(ticket){
-    alert(["Name of the event: "+ eventName+ "\n"+ "Event date: "+ eventData+ "\n"+ "Event time: "+ eventTime+ "\n"+ "Event venue: "+ eventVenue+ "\n"+ "Event type: "+ eventType+ "\n"+ "Venue district: "+ eventDistrict+ "\n"+ "Ticket price: "+ eventPrice+ "\n"+ "Contact person name: "+ eventPersonName+ "\n"+ "Contact number: "+ eventPersonNumber+ "\n"+ "Contact email: "+ eventPersonEmail+ "\n"+ "Extra notes: "+ eventExtraNotes]);
-    history.push('/mytickets');
+  if(addTicketValidation){
+    const id = Date.now();
+    const resp = await addTicket(id, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes);
+    if(resp){
+      toast('Ticket added successfully!');
+      history.push('/mytickets');
+    }
   }
 }
 

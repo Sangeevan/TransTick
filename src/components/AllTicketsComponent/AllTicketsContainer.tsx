@@ -1,16 +1,12 @@
 import { IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useState, valueOf } from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
+import {getAllTickets} from '../../firebaseConfig';
 
 interface ContainerProps { }
 
 const AllTicketsContainer: React.FC<ContainerProps> = () => {
-
-const tickets = [{"id":"1","name":"Cinema","price":"100"},
-                {"id":"2","name":"Music","price":"250"},
-                {"id":"3","name":"Dance","price":"500"},
-                {"id":"4","name":"Sports","price":"1000"}];
 
 const history = useHistory();
 
@@ -53,20 +49,25 @@ const [eventDistrict, setEventDistrict] = useState<string>();
       </IonList>
       <div className="containerAllTickets">
       <IonList>
-        {tickets.map(ticket => (
+        {/* {tickets.map(ticket => (
           <IonItem button onClick={()=>ticketDetails(history, ticket.id)}>
               <IonLabel>{ticket.name}</IonLabel>
               <IonLabel>{ticket.price}</IonLabel>
           </IonItem>
-        ))}
+        ))} */}
       </IonList>
       </div>
     </div>
   );
 };
 
-function filterbydistrict(history:any,district:string){
-  alert(district);
+async function filterbydistrict(history:any,district:string){
+//  console.log(await getAllTickets());
+
+ var username = (await getAllTickets() && await getAllTickets()) || 'Anonymous';
+
+ console.log(username['1598709165788']);
+
   history.push('/alltickets');
 }
 

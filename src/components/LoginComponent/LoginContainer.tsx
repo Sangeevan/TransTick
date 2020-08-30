@@ -55,7 +55,7 @@ async function login( history: any, userName: string, password:string){
   if(loginValidation){
     const res = await loginUser(userName,password);
     if(res){
-      toast('Login success');
+      toast('Login success. \n'+'Welcome '+userName+'!');
       history.push('/home');
     }
   }

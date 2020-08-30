@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignupContainer.css';
 import { useHistory } from 'react-router-dom';
-import {signupUser} from '../../firebaseConfig';
+import {signupUser, addUser} from '../../firebaseConfig';
 import { toast } from '../../toast';
 
 interface ContainerProps { }
@@ -106,7 +106,11 @@ async function signup( history:any, userName: string, password:string,  confirmP
   let signupUserValidation = false;
   if(userName!='' && password !=''){
     if(password===confirmPassword){
-      signupUserValidation = true;
+      if(phoneNumber!='' && email!='' && DOB!='' && gender!='' && address!='' && district!=''){
+        signupUserValidation = true;
+      }else{
+        toast('Please fill all fields');
+      }
     }else{
       toast('Password and confirm password are not matched');
     }
@@ -116,8 +120,12 @@ async function signup( history:any, userName: string, password:string,  confirmP
   if(signupUserValidation){
     const res = await signupUser(userName,password);
     if(res){
-      toast('Signup success');
-      history.push('/login');
+      const id = Date.now();
+      const resp = await addUser(id, userName, phoneNumber, email, DOB, gender, address, district);
+      if(resp){
+        toast('Account created successfully!');
+        history.push('/login');
+      }
     }
   }
 }
