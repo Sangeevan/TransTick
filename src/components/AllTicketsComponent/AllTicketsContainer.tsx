@@ -1,17 +1,20 @@
-import { IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from '@ionic/react';
-import React, { useState, valueOf } from 'react';
+import { IonItem, IonLabel, IonList } from '@ionic/react';
+import React from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedTicketState } from '../../redux/action';
 
-interface ContainerProps {}
+interface ContainerProps { }
 
 const AllTicketsContainer: React.FC<ContainerProps> = () => {
+
 const history = useHistory();
+const dispatch = useDispatch();
 
 var allTicket = useSelector((state:any) => state.alltickets.tickets);
 
-if((useSelector((state:any) => state.alltickets.tickets))==undefined){
+if(allTicket===undefined){
   allTicket = [{event_name:"No tickets available"}];
 }
 
@@ -19,7 +22,7 @@ if((useSelector((state:any) => state.alltickets.tickets))==undefined){
     <div className="containerAllTickets">
       <IonList>
         {allTicket.map((ticket: { event_name: React.ReactNode; event_price: React.ReactNode; }) => (
-          <IonItem>
+          <IonItem onClick={()=>ticketDetails(history,dispatch,ticket)}>
             <IonLabel>{ticket.event_name}</IonLabel>
             <IonLabel>{ticket.event_price}</IonLabel>
           </IonItem>
@@ -29,8 +32,8 @@ if((useSelector((state:any) => state.alltickets.tickets))==undefined){
   );
 };
 
-function ticketDetails(history:any, selectedTicket:string){
-  alert(selectedTicket);
+function ticketDetails(history:any, dispatch:any, selectedTicket:any){
+  dispatch(setSelectedTicketState(selectedTicket));
   history.push('/ticketdetails');
 }
 

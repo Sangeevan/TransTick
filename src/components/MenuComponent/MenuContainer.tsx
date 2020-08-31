@@ -50,7 +50,7 @@ export const MenuContainer: React.FC = () => {
 
 function logout(history:any,userName:string){
     history.push('/login');
-    toast('Logout success. \n'+'Goodbye '+userName+'!');
+    toast('Logout success.\nGoodbye '+userName+'!');
 }
 
 export default MenuContainer;

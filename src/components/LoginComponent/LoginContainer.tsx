@@ -18,10 +18,8 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   const [password, setPassword] = useState<string>('');
 
   const dispatch = useDispatch();
-  dispatch(setUserState(userName));
   
   return (
-
     <div className="containerLogin">
       <IonImg  className="img" src="/assets/images/transtick.png" />
       <IonList> 
@@ -35,7 +33,7 @@ const LoginContainer: React.FC<ContainerProps> = () => {
             <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
           </IonItem>
       </IonList>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(history,userName,password)}  >Sign in</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(history,dispatch,userName,password)}  >Sign in</IonButton>
       <br/>
       <div className="center">
       <p>Don't have an account?</p> 
@@ -45,9 +43,9 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-async function login( history: any, userName: string, password:string){
+async function login( history: any, dispatch:any, userName: string, password:string){
   let loginValidation = false;
-  if(userName!='' && password !=''){
+  if(userName!=='' && password !==''){
     loginValidation = true;
   }else{
     toast('Username and password are required');
@@ -55,7 +53,8 @@ async function login( history: any, userName: string, password:string){
   if(loginValidation){
     const res = await loginUser(userName,password);
     if(res){
-      toast('Login success. \n'+'Welcome '+userName+'!');
+      dispatch(setUserState(userName));
+      toast('Login success.\nWelcome '+userName+'!');
       history.push('/home');
     }
   }

@@ -9,3 +9,11 @@ export const setEventTypeState = (payload : any) => {
 export const setAllTicketsState = (payload : any) => {
     return { type: 'SET_ALL_TICKETS_STATE', payload}
 }
+
+export const setMyTicketsState = (payload : any) => {
+    return { type: 'SET_MY_TICKETS_STATE', payload}
+}
+
+export const setSelectedTicketState = (payload : any) => {
+    return { type: 'SET_SELECTED_TICKET_STATE', payload}
+}

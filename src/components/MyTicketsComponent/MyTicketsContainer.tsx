@@ -1,36 +1,80 @@
-import { IonButton, IonItem, IonLabel, IonList } from '@ionic/react';
-import React from 'react';
+import { IonAlert, IonButton, IonItem, IonLabel, IonList } from '@ionic/react';
+import React, { useState } from 'react';
 import './MyTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
+import { getMyTickets, deleteTicket } from '../../firebaseConfig';
+import { setMyTicketsState } from '../../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface ContainerProps { }
 
 const MyTicketsContainer: React.FC<ContainerProps> = () => {
 
-  const tickets = [{"id":"1","name":"Cinema","price":"100"},
-                {"id":"2","name":"Music","price":"250"},
-                {"id":"3","name":"Dance","price":"500"},
-                {"id":"4","name":"Sports","price":"1000"}];
+  const [showAlert, setShowAlert] = useState(false);
+  const [ticketId, setTicketId] = useState('');
+  const [ticketEventType, setTicketEventType] = useState('');
+  const [ticketEventDistrict, setTicketEventDistrict] = useState('');
 
+  const userName = useSelector((state:any) => state.user.username);
+
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  myTickets(dispatch,userName);
+
+  var myTicket = useSelector((state:any) => state.mytickets.tickets);
+
+  if(myTicket===undefined){
+    myTicket = [{event_name:"No tickets available"}];
+  }
 
   return (
     <div className="containerMyTickets">
       <IonList>
-        {tickets.map(ticket => (
+        {myTicket.map((ticket: { id: string; event_name: string; event_price: string; event_type: string; event_district: string; }) => (
           <IonItem>
-              <IonLabel>{ticket.name}</IonLabel>
-              <IonLabel>{ticket.price}</IonLabel>
-              <IonButton onClick={()=>deleteTicket(history, ticket.id)}>Delete</IonButton>
+            <IonLabel>{ticket.event_name}</IonLabel>
+            <IonLabel>{ticket.event_price}</IonLabel>
+            <IonButton onClick={()=>{setShowAlert(true);setTicketId(ticket.id);setTicketEventType(ticket.event_type);setTicketEventDistrict(ticket.event_district)}}>Delete</IonButton>
           </IonItem>
         ))}
       </IonList>
+      <IonAlert
+              isOpen={showAlert}
+              onDidDismiss={() => setShowAlert(false)}
+              cssClass='alert-box'
+              header={'Confirm!'}
+              message={'Do you want to <strong>delete</strong> this ticket?'}
+              buttons={[
+                {
+                  text: 'Cancel',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Okay',
+                  handler: () => {
+                    deleteMyTicket(history,userName,ticketId,ticketEventType,ticketEventDistrict);
+                  }
+                }
+              ]}
+            />
     </div>
   );
 };
 
-function deleteTicket(history:any, selectedTicket:string){
-  alert(selectedTicket);
+async function myTickets(dispatch:any, userName:string){
+  var tickets = (await getMyTickets(userName) && await getMyTickets(userName)) || 'Anonymous';
+  if(tickets === 'Anonymous'){
+    var noTicket = [{event_name:"No tickets available"}];
+    dispatch(setMyTicketsState(noTicket));
+  }else{
+    var myTicket = Object.values(tickets);
+    dispatch(setMyTicketsState(myTicket));
+  }
+}
+
+async function deleteMyTicket(history:any, userName:string, id:any, eventType:any, eventDistrict:any){
+  await deleteTicket(userName,id,eventType, eventDistrict);
   history.push('/mytickets');
 }
 

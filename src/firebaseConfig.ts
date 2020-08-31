@@ -19,7 +19,7 @@ const database = firebase.database();
 export async function loginUser(username: string, password:string){
     const email = `${username}@transtick.com`
     try{
-        const res = await firebase.auth().signInWithEmailAndPassword(email,password);
+        await firebase.auth().signInWithEmailAndPassword(email,password);
         return true
     }catch(error){
         toast(error.message);
@@ -30,7 +30,7 @@ export async function loginUser(username: string, password:string){
 export async function signupUser(username: string, password:string){
     const email = `${username}@transtick.com`
     try{
-        const res = await firebase.auth().createUserWithEmailAndPassword(email,password);
+        await firebase.auth().createUserWithEmailAndPassword(email,password);
         return true
     }catch(error){
         toast(error.message);
@@ -102,6 +102,29 @@ export async function getAllTickets(eventType:string, eventDistrict:string){
             var tickets = (snapshot.val() && snapshot.val()) || 'Anonymous';
             return tickets;
         });
+    }catch(error){
+        toast(error.message);
+        return false
+    }
+}
+
+export async function getMyTickets(userName:string){
+    try{
+        return firebase.database().ref('/users/'+userName+'/tickets').once('value').then(function(snapshot) {
+            var mytickets = (snapshot.val() && snapshot.val()) || 'Anonymous';
+            return mytickets;
+        });
+    }catch(error){
+        toast(error.message);
+        return false
+    }
+}
+
+export async function deleteTicket(userName:string, id:string, eventType:string, eventDistrict:string){
+    try{
+        firebase.database().ref('/users/'+userName+'/tickets/'+id).remove();
+        firebase.database().ref('/tickets/'+eventType+'/'+eventDistrict+'/'+id).remove();
+        return true;
     }catch(error){
         toast(error.message);
         return false

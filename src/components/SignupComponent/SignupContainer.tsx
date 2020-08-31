@@ -104,9 +104,9 @@ const SignupContainer: React.FC<ContainerProps> = () => {
 
 async function signup( history:any, userName: string, password:string,  confirmPassword:string,  phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string){
   let signupUserValidation = false;
-  if(userName!='' && password !=''){
+  if(userName!=='' && password !==''){
     if(password===confirmPassword){
-      if(phoneNumber!='' && email!='' && DOB!='' && gender!='' && address!='' && district!=''){
+      if(phoneNumber!=='' && email!=='' && DOB!=='' && gender!=='' && address!=='' && district!==''){
         signupUserValidation = true;
       }else{
         toast('Please fill all fields');
