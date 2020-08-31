@@ -61,7 +61,7 @@ const HomeContainer: React.FC<ContainerProps> = () => {
 
 function allTickets(history:any, dispatch:any, selectedType:string){
   dispatch(setEventTypeState(selectedType));
-  history.push('/alltickets');
+  history.push('/viewtickets');
 }
 
 export default HomeContainer;

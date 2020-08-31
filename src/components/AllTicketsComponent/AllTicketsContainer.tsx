@@ -2,76 +2,32 @@ import { IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from '@ionic/re
 import React, { useState, valueOf } from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
-import {getAllTickets} from '../../firebaseConfig';
 import { useSelector } from 'react-redux';
 
-interface ContainerProps { }
+interface ContainerProps {}
 
 const AllTicketsContainer: React.FC<ContainerProps> = () => {
-
 const history = useHistory();
 
-const selectedEventType = useSelector((state:any) => state.event.type);
+var allTicket = useSelector((state:any) => state.alltickets.tickets);
 
-const [eventDistrict, setEventDistrict] = useState<string>();
+if((useSelector((state:any) => state.alltickets.tickets))==undefined){
+  allTicket = [{event_name:"No tickets available"}];
+}
 
   return (
     <div className="containerAllTickets">
       <IonList>
-          <IonItem lines="full">
-            <IonLabel position="floating">Filter by district</IonLabel>
-            <IonSelect value={eventDistrict} onIonChange={e => {setEventDistrict(e.detail.value);filterbydistrict(history,selectedEventType,e.detail.value)}}>
-              <IonSelectOption value="Ampara">Ampara</IonSelectOption>
-              <IonSelectOption value="Anuradhapura">Anuradhapura</IonSelectOption>
-              <IonSelectOption value="Badulla">Badulla</IonSelectOption>
-              <IonSelectOption value="Batticaloa">Batticaloa</IonSelectOption>
-              <IonSelectOption value="Colombo">Colombo</IonSelectOption>
-              <IonSelectOption value="Galle">Galle</IonSelectOption>
-              <IonSelectOption value="Gampaha">Gampaha</IonSelectOption>
-              <IonSelectOption value="Hambantota">Hambantota</IonSelectOption>
-              <IonSelectOption value="Jaffna">Jaffna</IonSelectOption>
-              <IonSelectOption value="Kalutara">Kalutara</IonSelectOption>
-              <IonSelectOption value="Kandy">Kandy</IonSelectOption>
-              <IonSelectOption value="Kegalle">Kegalle</IonSelectOption>
-              <IonSelectOption value="Kilinochchi">Kilinochchi</IonSelectOption>
-              <IonSelectOption value="Kurunegala">Kurunegala</IonSelectOption>
-              <IonSelectOption value="Mannar">Mannar</IonSelectOption>
-              <IonSelectOption value="Matale">Matale</IonSelectOption>
-              <IonSelectOption value="Matara">Matara</IonSelectOption>
-              <IonSelectOption value="Moneragala">Moneragala</IonSelectOption>
-              <IonSelectOption value="Mullaitivu">Mullaitivu</IonSelectOption>
-              <IonSelectOption value="Nuwara Eliya">Nuwara Eliya</IonSelectOption>
-              <IonSelectOption value="Polonnaruwa">Polonnaruwa</IonSelectOption>
-              <IonSelectOption value="Puttalam">Puttalam</IonSelectOption>
-              <IonSelectOption value="Ratnapura">Ratnapura</IonSelectOption>
-              <IonSelectOption value="Trincomalee">Trincomalee</IonSelectOption>
-              <IonSelectOption value="Vavuniya">Vavuniya</IonSelectOption>
-            </IonSelect>    
-                 
+        {allTicket.map((ticket: { event_name: React.ReactNode; event_price: React.ReactNode; }) => (
+          <IonItem>
+            <IonLabel>{ticket.event_name}</IonLabel>
+            <IonLabel>{ticket.event_price}</IonLabel>
           </IonItem>
+        ))}
       </IonList>
-      <div className="containerAllTickets">
-      <IonList>
-        {/* {tickets.map(ticket => (
-          <IonItem button onClick={()=>ticketDetails(history, ticket.id)}>
-              <IonLabel>{ticket.name}</IonLabel>
-              <IonLabel>{ticket.price}</IonLabel>
-          </IonItem>
-        ))} */}
-      </IonList>
-      </div>
     </div>
   );
 };
-
-async function filterbydistrict(history:any,eventType:string,district:string){
-
-  var tickets = (await getAllTickets(eventType,district) && await getAllTickets(eventType,district)) || 'Anonymous';
-
-  console.log(tickets);
-
-  history.push('/alltickets');
-}
 
 function ticketDetails(history:any, selectedTicket:string){
   alert(selectedTicket);

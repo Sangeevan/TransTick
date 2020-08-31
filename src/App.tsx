@@ -7,6 +7,7 @@ import Menu from './components/MenuComponent/MenuContainer';
 import Login from './pages/LoginPage/Login';
 import Signup from './pages/SignupPage/Signup';
 import Home from './pages/HomePage/Home';
+import ViewTickets from './pages/ViewTicketsPage/ViewTickets';
 import AllTickets from './pages/AllTicketsPage/AllTickets';
 import AddTicket from './pages/AddTicketPage/AddTicket';
 import MyTickets from './pages/MyTicketsPage/MyTickets';
@@ -40,6 +41,7 @@ const App: React.FC = () => (
           <Route path="/login" component={Login} exact={true} />
           <Route path="/signup" component={Signup} exact={true} />
           <Route path="/home" component={Home} exact={true} />
+          <Route path="/viewtickets" component={ViewTickets} exact={true} />
           <Route path="/alltickets" component={AllTickets} exact={true} />
           <Route path="/addticket" component={AddTicket} exact={true} />
           <Route path="/mytickets" component={MyTickets} exact={true} />
