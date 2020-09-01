@@ -15,6 +15,7 @@ const config = {
 firebase.initializeApp(config)
 
 const database = firebase.database();
+const storage = firebase.storage();
 
 export async function loginUser(username: string, password:string){
     const email = `${username}@transtick.com`
@@ -38,17 +39,27 @@ export async function signupUser(username: string, password:string){
     }
 }
 
-export async function addUser(id: number, userName: string, phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string){
+export async function addUser(id: number, userName: string, phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string, file:any){
     try{
-        database.ref('/users/'+userName).set({
-            id: id,
-            user_name: userName,
-            phone_number: phoneNumber,
-            email: email,
-            dob: DOB,
-            gender: gender,
-            address: address,
-            district: district
+        storage.ref('/users/'+userName).put(file).then(function(){
+            var starsRef = storage.ref('/users/'+userName);
+            starsRef.getDownloadURL().then(function(url) {
+                database.ref('/users/'+userName).set({
+                    id: id,
+                    user_name: userName,
+                    phone_number: phoneNumber,
+                    email: email,
+                    dob: DOB,
+                    gender: gender,
+                    address: address,
+                    district: district,
+                    user_img: url
+                });
+              }).catch(
+                  function(error){
+                      console.log(error);
+                  }
+              );
         });
         return true
     }catch(error){

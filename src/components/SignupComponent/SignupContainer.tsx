@@ -19,8 +19,16 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   const [gender, setGender] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
+  const [file, setFile] = useState();
 
   const history = useHistory();
+
+  var fileButton = document.getElementById('fileButton');
+  fileButton?.addEventListener('change',function(e){
+    if(e.target){
+      setFile(e.target.files[0]);
+    }
+  })
 
   return (
     <div className="containerSignup">
@@ -90,9 +98,18 @@ const SignupContainer: React.FC<ContainerProps> = () => {
               <IonSelectOption value="Vavuniya">Vavuniya</IonSelectOption>
             </IonSelect>
           </IonItem>
+
+
+          <IonItem>
+            <div>
+              <input type="file"  id="fileButton"/>
+            </div>
+          </IonItem>
+
+
       </IonList>
       <br/>
-      <IonButton id="signupbtn" className="signup-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, email, DOB, gender, address, district)} >Create account</IonButton>
+      <IonButton id="signupbtn" className="signup-button" expand="block" onClick={()=>signup(history, userName, password, confirmPassword, phoneNumber, email, DOB, gender, address, district,file )} >Create account</IonButton>
       <br/>
       <div className="center">
       <p>Already have an account?</p> 
@@ -102,11 +119,11 @@ const SignupContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-async function signup( history:any, userName: string, password:string,  confirmPassword:string,  phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string){
+async function signup( history:any, userName: string, password:string,  confirmPassword:string,  phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string, file:any){
   let signupUserValidation = false;
   if(userName!=='' && password !==''){
     if(password===confirmPassword){
-      if(phoneNumber!=='' && email!=='' && DOB!=='' && gender!=='' && address!=='' && district!==''){
+      if(phoneNumber!=='' && email!=='' && DOB!=='' && gender!=='' && address!=='' && district!=='' && file !== undefined){
         signupUserValidation = true;
       }else{
         toast('Please fill all fields');
@@ -121,7 +138,7 @@ async function signup( history:any, userName: string, password:string,  confirmP
     const res = await signupUser(userName,password);
     if(res){
       const id = Date.now();
-      const resp = await addUser(id, userName, phoneNumber, email, DOB, gender, address, district);
+      const resp = await addUser(id, userName, phoneNumber, email, DOB, gender, address, district, file);
       if(resp){
         toast('Account created successfully!');
         history.push('/login');
