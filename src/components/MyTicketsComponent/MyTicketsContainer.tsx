@@ -32,11 +32,11 @@ const MyTicketsContainer: React.FC<ContainerProps> = () => {
     <div className="containerMyTickets">
       <IonList>
         {myTicket.map((ticket: { id: string; event_name: string; event_price: string; event_type: string; event_district: string; }) => (
-          <IonItem>
+           <IonItem>
             <IonLabel>{ticket.event_name}</IonLabel>
             <IonLabel>{ticket.event_price}</IonLabel>
-            <IonButton onClick={()=>{setShowAlert(true);setTicketId(ticket.id);setTicketEventType(ticket.event_type);setTicketEventDistrict(ticket.event_district)}}>Delete</IonButton>
-          </IonItem>
+            {ticket.event_name !== "No tickets available" && <IonButton onClick={()=>{setShowAlert(true);setTicketId(ticket.id);setTicketEventType(ticket.event_type);setTicketEventDistrict(ticket.event_district)}}>Delete</IonButton>}
+            </IonItem>
         ))}
       </IonList>
       <IonAlert

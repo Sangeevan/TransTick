@@ -32,6 +32,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import { useSelector } from 'react-redux';
+
 const App: React.FC = () => (
     <IonApp>
       <IonReactRouter>
@@ -40,12 +42,13 @@ const App: React.FC = () => (
           <Route exact path="/" render={() => <Redirect to="/login" />} />
           <Route path="/login" component={Login} exact={true} />
           <Route path="/signup" component={Signup} exact={true} />
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/viewtickets" component={ViewTickets} exact={true} />
-          <Route path="/alltickets" component={AllTickets} exact={true} />
-          <Route path="/addticket" component={AddTicket} exact={true} />
-          <Route path="/mytickets" component={MyTickets} exact={true} />
-          <Route path="/ticketdetails" component={TicketDetails} exact={true} />
+          {useSelector((state:any) => state.user.username) ? <Route path="/home" component={Home} exact={true} /> : <Redirect to="/login" />}
+          {useSelector((state:any) => state.user.username) ? <Route path="/viewtickets" component={ViewTickets} exact={true} /> : <Redirect to="/login" />}
+          {useSelector((state:any) => state.user.username) ? <Route path="/alltickets" component={AllTickets} exact={true} /> : <Redirect to="/login" />}
+          {useSelector((state:any) => state.user.username) ? <Route path="/addticket" component={AddTicket} exact={true} /> : <Redirect to="/login" />}
+          {useSelector((state:any) => state.user.username) ? <Route path="/mytickets" component={MyTickets} exact={true} /> : <Redirect to="/login" />}
+          {useSelector((state:any) => state.user.username) ? <Route path="/ticketdetails" component={TicketDetails} exact={true} /> : <Redirect to="/login" />}
+          <Route path="/*path" component={Login} exact={true} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

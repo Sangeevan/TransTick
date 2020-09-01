@@ -1,12 +1,15 @@
 import { IonButton, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList} from '@ionic/react';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { setUserState } from '../../redux/action';
 import './LoginContainer.css';
 import { useHistory } from 'react-router-dom';
 import {loginUser} from '../../firebaseConfig';
 import { toast } from '../../toast';
+
+import {ClimbingBoxLoader, HashLoader, PacmanLoader} from 'react-spinners'
+import { css } from "@emotion/core";
 
 interface ContainerProps { }
 
@@ -17,10 +20,15 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const [welcome, setWelcome] = useState<boolean>(true);
+
   const dispatch = useDispatch();
+
+  const logout = useSelector((state:any) => state.logout.islogout);
   
   return (
     <div className="containerLogin">
+      {welcome && !logout ? <div>
       <IonImg  className="img" src="/assets/images/transtick.png" />
       <IonList> 
           <IonItemDivider className="heading">Sign in to TransTick</IonItemDivider>
@@ -33,17 +41,40 @@ const LoginContainer: React.FC<ContainerProps> = () => {
             <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
           </IonItem>
       </IonList>
-      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(history,dispatch,userName,password)}  >Sign in</IonButton>
+      <IonButton id="loginbtn" className="login-button" expand="block" onClick={()=>login(history,dispatch,setWelcome,userName,password)}  >Sign in</IonButton>
       <br/>
       <div className="center">
       <p>Don't have an account?</p> 
       <strong><Link to="/signup">Sign up</Link></strong>
       </div>
+      </div> :
+      <div className="container">
+        {!welcome && 
+          <div>
+            <HashLoader 
+              css={css`display: block;margin: 0 auto;`}
+              size={150}
+              color={"#123abc"}
+              loading={!welcome}/>
+            <h1>Welcome to <b>TransTick</b></h1>
+          </div>
+        }
+        {logout && 
+          <div>
+            <ClimbingBoxLoader 
+              css={css`display: block;margin: 0 auto;`}
+              size={25}
+              color={"#123abc"}
+              loading={logout}/>
+            <h1>Goodbye</h1>
+          </div>
+        }
+      </div>}
     </div>
   );
 };
 
-async function login( history: any, dispatch:any, userName: string, password:string){
+async function login( history: any, dispatch:any,setWelcome:any, userName: string, password:string){
   let loginValidation = false;
   if(userName!=='' && password !==''){
     loginValidation = true;
@@ -53,9 +84,13 @@ async function login( history: any, dispatch:any, userName: string, password:str
   if(loginValidation){
     const res = await loginUser(userName,password);
     if(res){
+      setWelcome(false);
       dispatch(setUserState(userName));
       toast('Login success.\nWelcome '+userName+'!');
-      history.push('/home');
+      setTimeout(function() {
+        history.push('/home');
+        setWelcome(true);
+      }, 2000);
     }
   }
 }

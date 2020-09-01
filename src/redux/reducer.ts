@@ -3,7 +3,10 @@ const defaultState = {
     event:{},
     alltickets:{},
     mytickets:{},
-    selectedticket:{}
+    selectedticket:{},
+    logout:{
+        islogout:false
+    }
 }
 export default function reducer(state = defaultState, {type,payload} : {type:String, payload:any}) : any {
     switch(type){
@@ -40,6 +43,13 @@ export default function reducer(state = defaultState, {type,payload} : {type:Str
                 ...state,
                 selectedticket : {
                     ticket : payload
+                }
+            }
+        case 'SET_LOG_OUT_STATE' :
+            return {
+                ...state,
+                logout : {
+                    islogout : payload
                 }
             }
     }
