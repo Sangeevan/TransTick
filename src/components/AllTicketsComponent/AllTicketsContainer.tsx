@@ -1,9 +1,10 @@
-import { IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonBadge, IonChip, IonImg, IonItem, IonLabel, IonList, IonThumbnail } from '@ionic/react';
 import React from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedTicketState } from '../../redux/action';
+import { h } from 'ionicons/dist/types/stencil-public-runtime';
 
 interface ContainerProps { }
 
@@ -21,10 +22,18 @@ if(allTicket===undefined){
   return (
     <div className="containerAllTickets">
       <IonList>
-        {allTicket.map((ticket: { event_name: React.ReactNode; event_price: React.ReactNode; }) => (
-          <IonItem onClick={()=>ticketDetails(history,dispatch,ticket)}>
-            <IonLabel>{ticket.event_name}</IonLabel>
-            <IonLabel>{ticket.event_price}</IonLabel>
+        {allTicket.map((ticket: { ticket_img: string; event_name: React.ReactNode; event_seats: React.ReactNode; event_date: React.ReactNode;}) => (
+          <IonItem lines="full" onClick={()=>ticketDetails(history,dispatch,ticket)}>
+              {ticket.event_name !== "No tickets available" && <IonThumbnail slot="start">
+                <IonImg src={ticket.ticket_img}/>
+              </IonThumbnail>}
+              <IonLabel>
+                <h2><b>{ticket.event_name}</b></h2>
+                {ticket.event_name !== "No tickets available" && <IonLabel>
+                Date: {ticket.event_date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <IonChip color="primary">{ticket.event_seats}</IonChip>
+              </IonLabel>}
+              </IonLabel>
           </IonItem>
         ))}
       </IonList>

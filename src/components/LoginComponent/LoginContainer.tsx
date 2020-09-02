@@ -2,10 +2,10 @@ import { IonButton, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
-import { setUserState } from '../../redux/action';
+import { setUserState, setUserDetailsState } from '../../redux/action';
 import './LoginContainer.css';
 import { useHistory } from 'react-router-dom';
-import {loginUser} from '../../firebaseConfig';
+import {getUser, loginUser} from '../../firebaseConfig';
 import { toast } from '../../toast';
 
 import {ClimbingBoxLoader, HashLoader, PacmanLoader} from 'react-spinners'
@@ -87,6 +87,19 @@ async function login( history: any, dispatch:any,setWelcome:any, userName: strin
       setWelcome(false);
       dispatch(setUserState(userName));
       toast('Login success.\nWelcome '+userName+'!');
+
+
+
+
+      var userDetails = (await getUser(userName) && await getUser(userName)) || 'Anonymous';
+      if(userDetails === 'Anonymous'){
+        var noUserDetails = [{user_name:"User",user_img:""}];
+        dispatch(setUserDetailsState(noUserDetails));
+      }else{
+        dispatch(setUserDetailsState(userDetails));
+      }
+
+
       setTimeout(function() {
         history.push('/home');
         setWelcome(true);

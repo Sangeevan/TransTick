@@ -68,37 +68,62 @@ export async function addUser(id: number, userName: string, phoneNumber:string, 
     }
 }
 
-export async function addTicket(id: number, userName: string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string){
+export async function getUser(userName: string){
     try{
-        database.ref('/tickets/'+eventType+'/'+eventDistrict+'/'+id).set({
-            id: id,
-            user_name: userName,
-            event_name: eventName,
-            event_date: eventDate,
-            event_time: eventTime,
-            event_venue: eventVenue,
-            event_type: eventType,
-            event_district: eventDistrict,
-            event_price: eventPrice,
-            event_person_name: eventPersonName,
-            event_person_number: eventPersonNumber,
-            event_person_email: eventPersonEmail,
-            event_extra_notes: eventExtraNotes
+        return firebase.database().ref('/users/'+userName).once('value').then(function(snapshot) {
+            var userDetails = (snapshot.val() && snapshot.val()) || 'Anonymous';
+            return userDetails;
         });
-        database.ref('/users/'+userName+'/tickets'+'/'+id).set({
-            id: id,
-            user_name: userName,
-            event_name: eventName,
-            event_date: eventDate,
-            event_time: eventTime,
-            event_venue: eventVenue,
-            event_type: eventType,
-            event_district: eventDistrict,
-            event_price: eventPrice,
-            event_person_name: eventPersonName,
-            event_person_number: eventPersonNumber,
-            event_person_email: eventPersonEmail,
-            event_extra_notes: eventExtraNotes
+    }catch(error){
+        toast(error.message);
+        return false
+    }
+}
+
+export async function addTicket(id: number, userName: string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventSeats:string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string, file:any){
+    try{
+        storage.ref('/tickets/'+id).put(file).then(function(){
+            var starsRef = storage.ref('/tickets/'+id);
+            starsRef.getDownloadURL().then(function(url) {
+                database.ref('/tickets/'+eventType+'/'+eventDistrict+'/'+id).set({
+                    id: id,
+                    user_name: userName,
+                    event_name: eventName,
+                    event_date: eventDate,
+                    event_time: eventTime,
+                    event_venue: eventVenue,
+                    event_type: eventType,
+                    event_district: eventDistrict,
+                    event_price: eventPrice,
+                    event_seats: eventSeats,
+                    event_person_name: eventPersonName,
+                    event_person_number: eventPersonNumber,
+                    event_person_email: eventPersonEmail,
+                    event_extra_notes: eventExtraNotes,
+                    ticket_img: url
+                });
+                database.ref('/users/'+userName+'/tickets'+'/'+id).set({
+                    id: id,
+                    user_name: userName,
+                    event_name: eventName,
+                    event_date: eventDate,
+                    event_time: eventTime,
+                    event_venue: eventVenue,
+                    event_type: eventType,
+                    event_district: eventDistrict,
+                    event_price: eventPrice,
+                    event_seats: eventSeats,
+                    event_person_name: eventPersonName,
+                    event_person_number: eventPersonNumber,
+                    event_person_email: eventPersonEmail,
+                    event_extra_notes: eventExtraNotes,
+                    ticket_img: url
+                });
+              }).catch(
+                  function(error){
+                      console.log(error);
+                  }
+              );
         });
         return true
     }catch(error){

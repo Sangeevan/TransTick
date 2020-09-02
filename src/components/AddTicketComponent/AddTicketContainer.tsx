@@ -17,6 +17,7 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
   const [eventType, setEventType] = useState<string>('');
   const [eventDistrict, setEventDistrict] = useState<string>('');
   const [eventPrice, setEventPrice] = useState<string>('');
+  const [eventSeats, setEventSeats] = useState<string>('');
   const [eventPersonName, setEventPersonName] = useState<string>('');
   const [eventPersonNumber, setEventPersonNumber] = useState<string>('');
   const [eventPersonEmail, setEventPersonEmail] = useState<string>('');
@@ -24,6 +25,14 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
 
   const history = useHistory();
   const userName = useSelector((state:any) => state.user.username);
+  const [file, setFile] = useState();
+
+  var fileButton = document.getElementById('fileButton');
+  fileButton?.addEventListener('change',function(e){
+    if(e.target){
+      setFile(e.target.files[0]);
+    }
+  })
 
   return (
     <div className="containerAddTicket">
@@ -94,6 +103,16 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
             <IonInput type="number" value={eventPrice} onIonChange={e => setEventPrice(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem>
+            <IonLabel position="floating">Number of seats</IonLabel>
+            <IonInput type="number" value={eventSeats} onIonChange={e => setEventSeats(e.detail.value!)}></IonInput>
+          </IonItem>
+          <IonItem lines="full">
+            <div>Image&nbsp;</div>
+            <div>
+              <input type="file"  id="fileButton"/>
+            </div>
+          </IonItem>
+          <IonItem>
             <IonLabel position="floating">Contact person name</IonLabel>
             <IonInput type="text" value={eventPersonName} onIonChange={e => setEventPersonName(e.detail.value!)}></IonInput>
           </IonItem>
@@ -111,21 +130,21 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
           </IonItem>
       </IonList>
       <br/>
-      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>ticket(history, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes)} >Add Ticket</IonButton>
+      <IonButton id="addticketbtn" className="addticket-button" expand="block" onClick={()=>ticket(history, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventSeats, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes, file)} >Add Ticket</IonButton>
     </div>
   );
 };
 
-async function ticket(history: any, userName:string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string){
+async function ticket(history: any, userName:string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventSeats: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string, file:any){
   let addTicketValidation = false;
-  if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes){
+  if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventSeats && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes && file){
     addTicketValidation = true;
   }else{
     toast('Please fill all fields');
   }
   if(addTicketValidation){
     const id = Date.now();
-    const resp = await addTicket(id, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes);
+    const resp = await addTicket(id, userName, eventName, eventDate, eventTime, eventVenue, eventType, eventDistrict, eventPrice, eventSeats, eventPersonName, eventPersonNumber, eventPersonEmail, eventExtraNotes, file);
     if(resp){
       toast('Ticket added successfully!');
       history.push('/mytickets');

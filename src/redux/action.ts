@@ -21,3 +21,7 @@ export const setSelectedTicketState = (payload : any) => {
 export const setLogOutState = (payload : any) => {
     return { type: 'SET_LOG_OUT_STATE', payload}
 }
+
+export const setUserDetailsState = (payload : any) => {
+    return { type: 'SET_USER_DETAILS_STATE', payload}
+}

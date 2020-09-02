@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonThumbnail, IonImg, IonLabel, IonIcon, IonAlert } from '@ionic/react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonThumbnail, IonImg, IonLabel, IonIcon, IonAlert, IonAvatar } from '@ionic/react';
 import { homeOutline, folderOutline ,addCircleOutline, logOutOutline } from 'ionicons/icons'
 import './MenuContainer.css';
 import { menuController } from "@ionic/core";
@@ -8,9 +8,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from '../../toast';
 import { setLogOutState, setUserState } from '../../redux/action';
 
+var img_url = "https://firebasestorage.googleapis.com/v0/b/transtick-45ff8.appspot.com/o/TransTick.jpg?alt=media&token=8d056d0f-08ba-40d9-94d4-a7998ed5933f";
+
 export const MenuContainer: React.FC = () => {
     const history = useHistory();
     const userName = useSelector((state:any) => state.user.username);
+    const userDetails = useSelector((state:any) => state.userDetails.details);
+    if(userDetails){
+        if(userDetails.user_img){
+            img_url = userDetails.user_img;
+        }
+    }
     const dispatch = useDispatch();
     const [showAlert, setShowAlert] = useState(false);
     return(
@@ -23,9 +31,9 @@ export const MenuContainer: React.FC = () => {
             <IonContent>
                 <IonList>
                     <IonItem lines="full">
-                        <IonThumbnail slot="start">
-                            <IonImg src= 'https://miro.medium.com/max/3150/2*hTpk9HSXPH2QabMLpkO3iA.jpeg' />
-                        </IonThumbnail>
+                        <IonAvatar slot="start">
+                            <IonImg src={img_url}/>
+                        </IonAvatar>
                         <IonLabel>{userName}</IonLabel>
                     </IonItem>
                     <IonItem onClick={async () => await menuController.toggle()} routerLink="/home">

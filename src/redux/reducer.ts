@@ -1,5 +1,6 @@
 const defaultState = {
     user:{},
+    userDetails:{},
     event:{},
     alltickets:{},
     mytickets:{},
@@ -50,6 +51,13 @@ export default function reducer(state = defaultState, {type,payload} : {type:Str
                 ...state,
                 logout : {
                     islogout : payload
+                }
+            }
+        case 'SET_USER_DETAILS_STATE' :
+            return {
+                ...state,
+                userDetails:{
+                    details : payload
                 }
             }
     }
