@@ -1,10 +1,9 @@
-import { IonBadge, IonChip, IonImg, IonItem, IonLabel, IonList, IonThumbnail } from '@ionic/react';
+import { IonChip, IonImg, IonItem, IonLabel, IonList, IonThumbnail } from '@ionic/react';
 import React from 'react';
 import './AllTicketsContainer.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedTicketState } from '../../redux/action';
-import { h } from 'ionicons/dist/types/stencil-public-runtime';
 
 interface ContainerProps { }
 

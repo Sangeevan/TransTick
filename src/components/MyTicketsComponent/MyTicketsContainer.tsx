@@ -33,20 +33,21 @@ const MyTicketsContainer: React.FC<ContainerProps> = () => {
       <IonList>
         {myTicket.map((ticket: { ticket_img: string; id: string; event_name: string; event_date: string; event_seats: string; event_type: string; event_district: string; }) => (
           <IonItem lines="full">
-             {ticket.event_name !== "No tickets available" && <IonThumbnail slot="start">
-                <IonImg src={ticket.ticket_img}/>
-              </IonThumbnail>}
-              <IonLabel>
-                <h2><b>{ticket.event_name}</b></h2>
-                {ticket.event_name !== "No tickets available" && <IonLabel>
-                Date: {ticket.event_date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <IonChip color="primary">{ticket.event_seats}</IonChip>
-              </IonLabel>}
-              </IonLabel>
-              
-
-                <IonButton onClick={()=>{setShowAlert(true);setTicketId(ticket.id);setTicketEventType(ticket.event_type);setTicketEventDistrict(ticket.event_district)}}>Delete</IonButton>
-              
+            <IonList className="bgColor">
+              <IonItem lines="none">
+                {ticket.event_name !== "No tickets available" && <IonThumbnail slot="start">
+                    <IonImg src={ticket.ticket_img}/>
+                  </IonThumbnail>}
+                  <IonLabel>
+                    <h2><b>{ticket.event_name}</b></h2>
+                    {ticket.event_name !== "No tickets available" && <IonLabel>
+                    Date: {ticket.event_date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <IonChip color="primary">{ticket.event_seats}</IonChip>
+                    </IonLabel>}
+                  </IonLabel>
+              </IonItem>
+              {ticket.event_name !== "No tickets available" && <IonButton className="btnDelete" expand="block" onClick={()=>{setShowAlert(true);setTicketId(ticket.id);setTicketEventType(ticket.event_type);setTicketEventDistrict(ticket.event_district)}}>Delete</IonButton>}
+            </IonList>
           </IonItem>
         ))}
       </IonList>

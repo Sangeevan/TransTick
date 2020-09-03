@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonThumbnail, IonImg, IonLabel, IonIcon, IonAlert, IonAvatar } from '@ionic/react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonImg, IonLabel, IonIcon, IonAlert, IonAvatar } from '@ionic/react';
 import { homeOutline, folderOutline ,addCircleOutline, logOutOutline } from 'ionicons/icons'
 import './MenuContainer.css';
 import { menuController } from "@ionic/core";

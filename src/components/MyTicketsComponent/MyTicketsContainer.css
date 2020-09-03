@@ -8,7 +8,7 @@
 }
 
 .containerMyTickets{
-  margin: 20px;
+  margin: 10px;
 }
 
 .containerMyTickets strong {
@@ -27,8 +27,8 @@
   text-decoration: none;
 }
 
-.thumbSize{
-  height: 100px;
-  width: 100px;
-  text-align: left;
+.btnDelete{
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }

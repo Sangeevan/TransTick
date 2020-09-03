@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import {getUser, loginUser} from '../../firebaseConfig';
 import { toast } from '../../toast';
 
-import {ClimbingBoxLoader, HashLoader, PacmanLoader} from 'react-spinners'
+import {ClimbingBoxLoader, HashLoader} from 'react-spinners'
 import { css } from "@emotion/core";
 
 interface ContainerProps { }

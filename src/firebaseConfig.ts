@@ -39,7 +39,7 @@ export async function signupUser(username: string, password:string){
     }
 }
 
-export async function addUser(id: number, userName: string, phoneNumber:string, email:string, DOB:string,  gender:string,  address:string,  district:string, file:any){
+export async function addUser(id: number, userName: string, file:any){
     try{
         storage.ref('/users/'+userName).put(file).then(function(){
             var starsRef = storage.ref('/users/'+userName);
@@ -47,12 +47,6 @@ export async function addUser(id: number, userName: string, phoneNumber:string, 
                 database.ref('/users/'+userName).set({
                     id: id,
                     user_name: userName,
-                    phone_number: phoneNumber,
-                    email: email,
-                    dob: DOB,
-                    gender: gender,
-                    address: address,
-                    district: district,
                     user_img: url
                 });
               }).catch(
