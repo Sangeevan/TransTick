@@ -1,4 +1,4 @@
-import {  IonItem, IonLabel } from '@ionic/react';
+import {  IonItem, IonLabel, IonList } from '@ionic/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './TicketDetailsContainer.css';
@@ -15,11 +15,20 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
 
   return (
     <div className="containerTicketDetails">
-      <IonItem>
+      {ticketDetails.event_name === "No tickets available" &&<IonList>
+        <IonItem lines="full">
+          <IonLabel>
+            <h2><b>No details available</b></h2>
+          </IonLabel>
+        </IonItem>
+      </IonList>}
+      {ticketDetails.event_name !== "No tickets available" &&<IonList>
+      <IonItem lines="full">
         <IonLabel>{ticketDetails.event_name}</IonLabel>
         <IonLabel>{ticketDetails.event_venue}</IonLabel>
         <IonLabel>{ticketDetails.event_price}</IonLabel>
       </IonItem>
+      </IonList>}
     </div>
   );
 };

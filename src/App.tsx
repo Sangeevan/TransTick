@@ -37,7 +37,7 @@ import { useSelector } from 'react-redux';
 const App: React.FC = () => (
     <IonApp>
       <IonReactRouter>
-        <Menu/>
+      {useSelector((state:any) => state.user.username) && <Menu/>}
         <IonRouterOutlet>
           <Route exact path="/" render={() => <Redirect to="/login" />} />
           <Route path="/login" component={Login} exact={true} />

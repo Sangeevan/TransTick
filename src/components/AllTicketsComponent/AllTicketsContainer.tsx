@@ -20,7 +20,7 @@ if(allTicket===undefined){
 
   return (
     <div className="containerAllTickets">
-      <IonList>
+      {allTicket[0].event_name !== "No tickets available" && <IonList>
         {allTicket.map((ticket: { ticket_img: string; event_name: React.ReactNode; event_seats: React.ReactNode; event_date: React.ReactNode;}) => (
           <IonItem lines="full" onClick={()=>ticketDetails(history,dispatch,ticket)}>
               {ticket.event_name !== "No tickets available" && <IonThumbnail slot="start">
@@ -31,11 +31,18 @@ if(allTicket===undefined){
                 {ticket.event_name !== "No tickets available" && <IonLabel>
                 Date: {ticket.event_date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <IonChip color="primary">{ticket.event_seats}</IonChip>
-              </IonLabel>}
+                </IonLabel>}
               </IonLabel>
           </IonItem>
         ))}
-      </IonList>
+      </IonList>}
+      {allTicket[0].event_name === "No tickets available" && <IonList>
+        <IonItem lines="full">
+          <IonLabel>
+            <h2><b>No tickets available</b></h2>
+          </IonLabel>
+        </IonItem>
+      </IonList>}
     </div>
   );
 };

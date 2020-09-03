@@ -5,7 +5,7 @@ import './Signup.css';
 
 const Signup: React.FC = () => {
   return (
-    <IonPage>
+    <IonPage id="menu">
       <IonHeader>
         <IonToolbar>
           <IonTitle>Create Account</IonTitle>
