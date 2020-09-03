@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonFab, IonFabButton, IonIcon, IonImg } from '@ionic/react';
+import { IonButton, IonCard, IonCardTitle, IonContent, IonFab, IonFabButton, IonIcon, IonImg } from '@ionic/react';
 import { addSharp } from 'ionicons/icons';
 import React from 'react';
 import './HomeContainer.css';
@@ -17,36 +17,46 @@ const HomeContainer: React.FC<ContainerProps> = () => {
   return (
     <IonContent fullscreen>
       <div className="containerHome">
-        <IonButton id="Cinema" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Cinema")} >
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Cinema")} >
           <IonImg alt="Cinema" src="/assets/images/cinema.png"/>
-        </IonButton>
-        <IonButton id="Music" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Music")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Cinema</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Music")} >
           <IonImg alt="Music" src="/assets/images/music.png"/>
-        </IonButton>
-        <IonButton id="Dance" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Dance")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Music</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Dance")} >
           <IonImg alt="Dance" src="/assets/images/dance.png"/>
-        </IonButton>
-        <IonButton id="Sports" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Sports")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Dance</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Sports")} >
           <IonImg alt="Sports" src="/assets/images/sports.png"/>
-        </IonButton>
-        <IonButton id="Festivals" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Festivals")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Sports</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Festivals")} >
           <IonImg alt="Festivals" src="/assets/images/festival.png"/>
-        </IonButton>
-        <IonButton id="Shows" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Shows")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Festivals</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Shows")} >
           <IonImg alt="Shows" src="/assets/images/shows.png"/>
-        </IonButton>
-        <IonButton id="Party" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Party")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Shows</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Party")} >
           <IonImg alt="Party" src="/assets/images/party.png"/>
-        </IonButton>
-        <IonButton id="Exhibition" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Exhibition")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Party</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Exhibition")} >
           <IonImg alt="Exhibition" src="/assets/images/exhibition.png"/>
-        </IonButton>
-        <IonButton id="Seminar" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Seminar")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Exhibition</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Seminar")} >
           <IonImg alt="Seminar" src="/assets/images/seminar.png"/>
-        </IonButton>
-        <IonButton id="Other" className="homeButton" expand="block" onClick={()=>allTickets(history, dispatch, "Other")} >
+          <IonCardTitle className="md-card-title mbsc-align-center">Seminar</IonCardTitle>
+        </IonCard>
+        <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Other")} >
           <IonImg alt="Other" src="/assets/images/other.png"/>
-        </IonButton>
+          <IonCardTitle className="md-card-title mbsc-align-center">Other</IonCardTitle>
+        </IonCard>
       </div>
 
       <IonFab vertical="bottom" horizontal="end" slot="fixed">

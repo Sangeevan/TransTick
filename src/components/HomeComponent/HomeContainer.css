@@ -31,3 +31,36 @@
   height: 100px;
   margin: 20px;
 }
+
+.card{
+  height: 100px;
+}
+
+.imgsize{
+  height:100px;
+}
+
+
+
+.md-card-bg .md-card-subtitle,
+.md-card-bg .md-card-title {
+  position: absolute;
+  top: 50%;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 50px;
+  font-family: 'Cooper Black', Times, serif;
+  font-weight: bold;
+  text-shadow: 4px 4px #b5b5b5;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000;
+}
+
+.md-card-bg{
+  height:100px;
+}
