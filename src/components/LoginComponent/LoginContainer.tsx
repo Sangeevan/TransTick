@@ -29,7 +29,7 @@ const LoginContainer: React.FC<ContainerProps> = () => {
   return (
     <div className="containerLogin">
       {welcome && !logout ? <div>
-      <IonImg  className="img" src="/assets/images/transtick.png" />
+      <IonImg src="/assets/images/transtick.png" />
       <IonList> 
           <IonItemDivider className="heading">Sign in to TransTick</IonItemDivider>
           <IonItem>

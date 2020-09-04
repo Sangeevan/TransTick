@@ -29,7 +29,7 @@ if(allTicket===undefined){
               <IonLabel>
                 <h2><b>{ticket.event_name}</b></h2>
                 {ticket.event_name !== "No tickets available" && <IonLabel>
-                Date: {ticket.event_date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Date: {ticket.event_date}&nbsp;&nbsp;
                 <IonChip color="primary">{ticket.event_seats}</IonChip>
                 </IonLabel>}
               </IonLabel>

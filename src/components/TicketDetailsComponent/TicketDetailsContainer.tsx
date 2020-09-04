@@ -22,22 +22,25 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
           </IonLabel>
         </IonItem>
       </IonList>}
-      {/* {ticketDetails.event_name !== "No tickets available" &&<IonList>
-      <IonItem lines="full">
-        <IonLabel>{ticketDetails.event_name}</IonLabel>
-        <IonLabel>{ticketDetails.event_venue}</IonLabel>
-        <IonLabel>{ticketDetails.event_price}</IonLabel>
-      </IonItem>
-      </IonList>} */}
       {ticketDetails.event_name !== "No tickets available" && <IonCard>
-        <img src="/assets/images/exhibition.png"/>
+        <img className="fitImage" src={ticketDetails.ticket_img}/>
         <IonCardHeader>
           <IonCardTitle><b>{ticketDetails.event_name}</b></IonCardTitle>
-          <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+          <IonCardSubtitle>{ticketDetails.event_type} | {ticketDetails.event_district}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          <p><b>Ticket details</b></p>
+          <IonCardSubtitle className="detailCol"><b>Date: </b>{ticketDetails.event_date}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Time: </b>{ticketDetails.event_time}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Venue: </b>{ticketDetails.event_venue}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Seats: </b>{ticketDetails.event_seats}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Price: </b>{ticketDetails.event_price}</IonCardSubtitle>
+          <p><b>Contact details</b></p>
+          <IonCardSubtitle className="detailCol"><b>Name: </b>{ticketDetails.event_person_name}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Phone: </b>{ticketDetails.event_person_number}</IonCardSubtitle>
+          <IonCardSubtitle className="detailCol"><b>Email: </b>{ticketDetails.event_person_email}</IonCardSubtitle>
+          <p><b>Extra notes</b></p>
+          <IonCardSubtitle className="detailCol">{ticketDetails.event_extra_notes}</IonCardSubtitle>
         </IonCardContent>
       </IonCard>}
     </div>
