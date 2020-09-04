@@ -18,43 +18,43 @@ const HomeContainer: React.FC<ContainerProps> = () => {
     <IonContent fullscreen>
       <div className="containerHome">
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Cinema")} >
-          <IonImg alt="Cinema" src="/assets/images/cinema.png"/>
+          <IonImg className="fitImg" alt="Cinema" src="/assets/images/cinema.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Cinema</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Music")} >
-          <IonImg alt="Music" src="/assets/images/music.png"/>
+          <IonImg className="fitImg" alt="Music" src="/assets/images/music.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Music</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Dance")} >
-          <IonImg alt="Dance" src="/assets/images/dance.png"/>
+          <IonImg className="fitImg" alt="Dance" src="/assets/images/dance.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Dance</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Sports")} >
-          <IonImg alt="Sports" src="/assets/images/sports.png"/>
+          <IonImg className="fitImg" alt="Sports" src="/assets/images/sports.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Sports</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Festivals")} >
-          <IonImg alt="Festivals" src="/assets/images/festival.png"/>
+          <IonImg className="fitImg" alt="Festivals" src="/assets/images/festival.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Festivals</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Shows")} >
-          <IonImg alt="Shows" src="/assets/images/shows.png"/>
+          <IonImg className="fitImg" alt="Shows" src="/assets/images/shows.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Shows</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Party")} >
-          <IonImg alt="Party" src="/assets/images/party.png"/>
+          <IonImg className="fitImg" alt="Party" src="/assets/images/party.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Party</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Exhibition")} >
-          <IonImg alt="Exhibition" src="/assets/images/exhibition.png"/>
+          <IonImg className="fitImg" alt="Exhibition" src="/assets/images/exhibition.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Exhibition</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Seminar")} >
-          <IonImg alt="Seminar" src="/assets/images/seminar.png"/>
+          <IonImg className="fitImg" alt="Seminar" src="/assets/images/seminar.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Seminar</IonCardTitle>
         </IonCard>
         <IonCard className="md-card-bg" onClick={()=>allTickets(history, dispatch, "Other")} >
-          <IonImg alt="Other" src="/assets/images/other.png"/>
+          <IonImg className="fitImg" alt="Other" src="/assets/images/other.jpg"/>
           <IonCardTitle className="md-card-title mbsc-align-center">Other</IonCardTitle>
         </IonCard>
       </div>

@@ -29,16 +29,16 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
         <IonLabel>{ticketDetails.event_price}</IonLabel>
       </IonItem>
       </IonList>} */}
-      {ticketDetails.event_name !== "No tickets available" && <IonCard className="card">
+      {ticketDetails.event_name !== "No tickets available" && <IonCard>
         <img src="/assets/images/exhibition.png"/>
-        {/* <IonCardHeader>
+        <IonCardHeader>
           <IonCardTitle><b>{ticketDetails.event_name}</b></IonCardTitle>
           <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
             Keep close to Nature's heart... and break clear away, once in awhile,
             and climb a mountain or spend a week in the woods. Wash your spirit clean.
-        </IonCardContent> */}
+        </IonCardContent>
       </IonCard>}
     </div>
   );

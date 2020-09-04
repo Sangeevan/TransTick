@@ -40,8 +40,6 @@
   height:100px;
 }
 
-
-
 .md-card-bg .md-card-subtitle,
 .md-card-bg .md-card-title {
   position: absolute;
@@ -63,4 +61,13 @@
 
 .md-card-bg{
   height:100px;
+}
+
+.fitImg{
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
