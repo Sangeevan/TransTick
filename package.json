@@ -31,6 +31,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-hook-form": "^6.4.1",
+    "react-images-upload": "^1.2.8",
     "react-loading-screen": "0.0.17",
     "react-redux": "^7.2.1",
     "react-router": "^5.1.2",

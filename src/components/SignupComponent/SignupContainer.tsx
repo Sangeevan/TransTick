@@ -5,6 +5,7 @@ import './SignupContainer.css';
 import { useHistory } from 'react-router-dom';
 import {signupUser, addUser} from '../../firebaseConfig';
 import { toast } from '../../toast';
+import ImageUploader from 'react-images-upload';
 
 interface ContainerProps { }
 
@@ -17,12 +18,9 @@ const SignupContainer: React.FC<ContainerProps> = () => {
 
   const history = useHistory();
 
-  var fileButton = document.getElementById('fileButton');
-  fileButton?.addEventListener('change',function(e){
-    if(e.target){
-      setFile(e.target.files[0]);
-    }
-  })
+  function onDrop(picture:any) {
+    setFile(picture[0]);
+  }
 
   return (
     <div className="containerSignup">
@@ -39,11 +37,17 @@ const SignupContainer: React.FC<ContainerProps> = () => {
             <IonLabel position="floating">Confirm password</IonLabel>
             <IonInput type="password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)}></IonInput>
           </IonItem>
-          <IonItem>
-            <div>Profile&nbsp;</div>
-            <div>
-              <input type="file"  id="fileButton"/>
-            </div>
+          <IonItem lines="full">
+          <ImageUploader  
+            buttonText='Choose a profile image'
+            onChange={onDrop}
+            withPreview={true}
+            singleImage={true}
+            withIcon={false}
+            withLabel={false}
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+          />
           </IonItem>
       </IonList>
       <br/>

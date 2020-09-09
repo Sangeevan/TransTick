@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from '../../toast';
 import {addTicket} from '../../firebaseConfig';
+import ImageUploader from 'react-images-upload';
 
 interface ContainerProps { }
 
@@ -27,12 +28,9 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
   const userName = useSelector((state:any) => state.user.username);
   const [file, setFile] = useState();
 
-  var fileButton = document.getElementById('fileButton');
-  fileButton?.addEventListener('change',function(e){
-    if(e.target){
-      setFile(e.target.files[0]);
-    }
-  })
+  function onDrop(picture:any) {
+    setFile(picture[0]);
+  }
 
   return (
     <div className="containerAddTicket">
@@ -107,10 +105,16 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
             <IonInput type="number" value={eventSeats} onIonChange={e => setEventSeats(e.detail.value!)}></IonInput>
           </IonItem>
           <IonItem lines="full">
-            <div>Image&nbsp;</div>
-            <div>
-              <input type="file"  id="fileButton"/>
-            </div>
+          <ImageUploader  
+            buttonText='Choose an event image'
+            onChange={onDrop}
+            withPreview={true}
+            singleImage={true}
+            withIcon={false}
+            withLabel={false}
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+          />
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Contact person name</IonLabel>
@@ -137,8 +141,12 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
 
 async function ticket(history: any, userName:string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventSeats: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string, file:any){
   let addTicketValidation = false;
-  if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventSeats && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes && file){
-    addTicketValidation = true;
+  if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventSeats && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes){
+    if(file){
+      addTicketValidation = true;
+    }else{
+      toast('Please select an event image');
+    }
   }else{
     toast('Please fill all fields');
   }

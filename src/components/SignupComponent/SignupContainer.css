@@ -40,3 +40,9 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.fileContainer.fileContainer{
+  padding: 0%;
+  box-shadow: none;
+  display: block;
+}
