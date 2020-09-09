@@ -142,10 +142,18 @@ const AddTicketContainer: React.FC<ContainerProps> = () => {
 async function ticket(history: any, userName:string, eventName: string, eventDate: string, eventTime: string, eventVenue: string, eventType: string, eventDistrict: string, eventPrice: string, eventSeats: string, eventPersonName: string, eventPersonNumber: string, eventPersonEmail: string, eventExtraNotes: string, file:any){
   let addTicketValidation = false;
   if(eventName && eventDate && eventTime && eventVenue && eventType && eventDistrict && eventPrice && eventSeats && eventPersonName && eventPersonNumber && eventPersonEmail && eventExtraNotes){
-    if(file){
-      addTicketValidation = true;
+    if(new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(eventPersonEmail)){
+      if(new RegExp(/[0]+[0-9]{9}$/g).test(eventPersonNumber)){
+        if(file){
+          addTicketValidation = true;
+        }else{
+          toast('Please select an event image');
+        }
+      }else{
+        toast('Please give valid phone number');
+      }
     }else{
-      toast('Please select an event image');
+      toast('Please give valid email');
     }
   }else{
     toast('Please fill all fields');
