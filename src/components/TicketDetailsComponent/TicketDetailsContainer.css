@@ -37,3 +37,17 @@
   color: black;
 }
 
+.headingBuy {
+  font-size: 16px;
+  line-height: 20px;
+  color: blue;
+  margin-top: 15px;
+  padding: 0px;
+}
+
+.buyBtns{
+  width: 45%;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}

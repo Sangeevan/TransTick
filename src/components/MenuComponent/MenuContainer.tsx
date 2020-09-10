@@ -37,20 +37,20 @@ export const MenuContainer: React.FC = () => {
                         <IonLabel>{userName}</IonLabel>
                     </IonItem>
                     <IonItem onClick={async () => await menuController.toggle()} routerLink="/home">
-                        <IonIcon icon={homeOutline} />
+                        <IonIcon icon={homeOutline} />&nbsp;
                         <IonLabel>Home</IonLabel>
                     </IonItem>
                     <IonItem onClick={async () => await menuController.toggle()} routerLink="/mytickets">
-                        <IonIcon icon={folderOutline} />
+                        <IonIcon icon={folderOutline} />&nbsp;
                         <IonLabel>My Tickets</IonLabel>
                     </IonItem>
                     <IonItem onClick={async () => await menuController.toggle()} routerLink="/addticket" lines="none">
-                        <IonIcon icon={addCircleOutline} />
+                        <IonIcon icon={addCircleOutline} />&nbsp;
                         <IonLabel>Add Ticket</IonLabel>
                     </IonItem>
                     <IonItem lines="full"></IonItem>
                     <IonItem onClick={async () => {await menuController.toggle();setShowAlert(true)}} lines="none">
-                        <IonIcon icon={logOutOutline} />
+                        <IonIcon icon={logOutOutline} />&nbsp;
                         <IonLabel>Sign Out</IonLabel>
                     </IonItem>
                 </IonList>

@@ -1,4 +1,5 @@
-import {  IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonItem, IonLabel, IonList } from '@ionic/react';
+import {  IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonItemDivider, IonLabel, IonList } from '@ionic/react';
+import { callOutline, mailOpenOutline } from 'ionicons/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './TicketDetailsContainer.css';
@@ -41,6 +42,9 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
           <IonCardSubtitle className="detailCol"><b>Email: </b>{ticketDetails.event_person_email}</IonCardSubtitle>
           <p><b>Extra notes</b></p>
           <IonCardSubtitle className="detailCol">{ticketDetails.event_extra_notes}</IonCardSubtitle>
+          <IonItemDivider className="headingBuy"><b>Buy ticket</b></IonItemDivider>
+          <a href={"tel:"+ticketDetails.event_person_number}><IonButton className="buyBtns"><IonIcon icon={callOutline}/>&nbsp;Call</IonButton></a>
+          <a href={"mailto:"+ticketDetails.event_person_email}><IonButton className="buyBtns"><IonIcon icon={mailOpenOutline}/>&nbsp;Email</IonButton></a>
         </IonCardContent>
       </IonCard>}
     </div>
