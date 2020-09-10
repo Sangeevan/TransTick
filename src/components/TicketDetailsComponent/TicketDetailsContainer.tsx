@@ -44,7 +44,7 @@ const TicketDetailsContainer: React.FC<ContainerProps> = () => {
           <IonCardSubtitle className="detailCol">{ticketDetails.event_extra_notes}</IonCardSubtitle>
           <IonItemDivider className="headingBuy"><b>Buy ticket</b></IonItemDivider>
           <a href={"tel:"+ticketDetails.event_person_number}><IonButton className="buyBtns"><IonIcon icon={callOutline}/>&nbsp;Call</IonButton></a>
-          <a href={"mailto:"+ticketDetails.event_person_email}><IonButton className="buyBtns"><IonIcon icon={mailOpenOutline}/>&nbsp;Email</IonButton></a>
+          <a href={"mailto:"+ticketDetails.event_person_email+"?subject=TransTick%20-%20Buy%20Ticket%20("+ticketDetails.event_name+")"}><IonButton className="buyBtns"><IonIcon icon={mailOpenOutline}/>&nbsp;Email</IonButton></a>
         </IonCardContent>
       </IonCard>}
     </div>
